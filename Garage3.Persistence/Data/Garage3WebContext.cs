@@ -15,5 +15,16 @@ namespace Garage3.Persistence.Data
         }
 
         public DbSet<Vehicle> Vehicle { get; set; } = default!;
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //modelBuilder.HasMany(s => s.Vehicle)
+            //.WithMany(c => c.Spot)
+            //.UsingEntity<Spot>(
+            //    e => e.HasOne(e => e.Vehicle).WithMany(c => c.Spot),
+            //    //e => e.HasOne(e => e.Spot).WithMany(c => c.Vehicle),
+            //    e => e.HasKey(e => new { e.VehicleId, e.SpotId }));
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

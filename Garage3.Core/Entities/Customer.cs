@@ -13,5 +13,8 @@ namespace Garage3.Core.Entities
         public string LastName { get; set; }
         public string FullName => $"{FirstName} {LastName}";
         public string SocialNum { get; set; }
+
+        //Navigation property
+        public ICollection<Vehicle> Vehicles { get; set; }
     }
 }

@@ -14,5 +14,8 @@ namespace Garage3.Core.Entities
         public int Capacity { get; set; }
         //public in BlockSize { get; set; }
 
+        //Navigation property
+        public ICollection<Spot> Spots { get; set; }
+
     }
 }

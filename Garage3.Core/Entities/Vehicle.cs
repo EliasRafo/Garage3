@@ -9,7 +9,6 @@ namespace Garage3.Core.Entities
     public class Vehicle
     {
         public int Id { get; set; }
-       // public int CustomerId { get; set; }
        public int ParkingId { get; set; }
         public VehicleType VehicleType { get; set; }
 
@@ -18,6 +17,15 @@ namespace Garage3.Core.Entities
         public string Color { get; set; }
         public string Brand { get; set; }
         public string Model { get; set; }
-        public int  WheelsNum { get; set; }
+        public int  WheelsNumber { get; set; }
+
+        // Foreign Key
+       public int CustomerId { get; set; }
+
+        //Navigation property
+        public Customer Customer { get; set; }
+
+        //Navigation property
+        public ICollection<Spot> Spots { get; set; }
     }
 }

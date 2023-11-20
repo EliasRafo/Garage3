@@ -73,12 +73,14 @@ namespace Garage3.Persistence.Services
         }
 
         public async Task<IEnumerable<Spot>> GetSpot() 
-        { // add customer information
+        { 
+            // Change to use of viewmodel+Select, discuss what data we need.
             return await _context.Spot.Where(s => s.Active == true)
-        .Include(s => s.Vehicle)
-        .ThenInclude(v => v.VehicleType)
-        .Include(s => s.Garage)
-        .ToListAsync();
+                .Include(s => s.Vehicle)
+                .ThenInclude(v => v.VehicleType)
+                .Include(s => s.Vehicle.Customer)
+                .Include(s => s.Garage)
+                .ToListAsync();
         }
     }
 }

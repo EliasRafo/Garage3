@@ -9,9 +9,11 @@ namespace Garage3.Core.Entities
 {
     public class Vehicle
     {
-        [Key]
+        //[Key]
         public int Id { get; set; }
-       public int ParkingId { get; set; }
+       //public int ParkingId { get; set; }
+       //FK
+       public int VehicleTypeId { get; set; }
         public VehicleType VehicleType { get; set; }
 
         public string RegNum { get; set; }

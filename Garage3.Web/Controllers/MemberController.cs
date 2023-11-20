@@ -113,8 +113,10 @@ namespace Garage3.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Park()
+        public IActionResult Park(Vehicle vehicle)//Park() TEST
         {
+            //TEST
+            var a=vehicle;
             return View();
         }
 

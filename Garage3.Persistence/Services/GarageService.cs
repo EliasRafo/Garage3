@@ -73,7 +73,7 @@ namespace Garage3.Persistence.Services
         }
 
         public async Task<IEnumerable<Spot>> GetSpot() 
-        {
+        { // add customer information
             return await _context.Spot.Where(s => s.Active == true)
         .Include(s => s.Vehicle)
         .ThenInclude(v => v.VehicleType)

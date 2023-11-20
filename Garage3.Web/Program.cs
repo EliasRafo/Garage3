@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Garage3.Persistence.Data;
+using Microsoft.DotNet.Scaffolding.Shared.ProjectModel;
+using Garage3.Persistence.Services;
 
 namespace Garage3.Web
 {
@@ -11,6 +13,8 @@ namespace Garage3.Web
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddDbContext<Garage3WebContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("Garage3WebContext") ?? throw new InvalidOperationException("Connection string 'Garage3WebContext' not found.")));
+
+            builder.Services.AddScoped<IGarageService, GarageService>();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();

@@ -1,8 +1,77 @@
-﻿@{
+﻿@model Garage3.Web.Models.ViewModels.OverviewViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Welcome to garage</h1>
+
+    <p>You have to be registered in garage to check in/out your vehicle.</p>
+
+    <h4>Sign in to continue to Garage</h4>  <p>No account? <a asp-action="Index">Create one!</a></p>
+
+    <form asp-action="Search">
+    <div class="input-group inputs">
+            <input type="text" name="ssnumber" placeholder="Enter your social security number" required>
+            <button class="signin-button" type="submit">Sign in</button>
+    </div>
+    </form>
+
+    <div class="container">
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        
+
+        <section class="row text-center placeholders">
+            <div class="col-6 col-sm-3">
+                <div class="panel border border-info border-6 h-100">
+                    <div class="panel-heading alert-info p-2 fw-bold">Capacity</div>
+                    <div class="panel-body">
+                        <h4 class="m-5">@Model.Capacity</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-sm-3">
+                <div class="panel border border-success border-6 h-100">
+                    <div class="panel-heading alert-success p-2 fw-bold">Customer</div>
+                    <div class="panel-body">
+                        <h4 class="m-5">@Model.CustomerNumber</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-sm-3">
+                <div class="panel border border-warning border-6 h-100">
+                    <div class="panel-heading alert-warning p-2 fw-bold">Registered vehicles</div>
+                    <div class="panel-body">
+                        <h4 class="m-5">@Model.VehiclesNumber</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-sm-3">
+                <div class="panel border border-danger border-6 h-100">
+                    <div class="panel-heading alert-danger p-2 fw-bold">Currently parked</div>
+                    <div class="panel-body">
+                        <h4 class="m-5">@Model.CurrentlyParked</h4>
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+        </div>
+
+    
+        <h2>Statistic</h2>
+
+        <ul class="list-group">
+
+            @if (Model.VehiclesStatistic is not null)
+            {
+                @foreach (var item in Model.VehiclesStatistic)
+                {
+                    <li class="list-group-item d-flex justify-content-between align-items-center">@string.Format("Vehicle: {0}", @item.Name)<span class="badge bg-primary rounded-pill">@item.Total</span></li>
+                }
+            }
+            
+        </ul>
+
+        </div>
 </div>

@@ -5,6 +5,7 @@ using Garage3.Web.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System.Diagnostics.Metrics;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -111,6 +112,43 @@ namespace Garage3.Web.Controllers
             return View("AddVehicle");
         }
 
-        
+        [HttpGet]
+        public IActionResult Park()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Park(Vehicle vehicle, int id)
+        {
+            vehicle.ParkingTime = DateTime.Now;
+            vehicle.Address = id;
+            if (ModelState.IsValid)
+            {
+                if (!await VehicleExists(vehicle))
+                {
+                    _context.Add(vehicle);
+                    await _context.SaveChangesAsync();
+                    Feedback feedback = new Feedback() { status = "ok", message = $"Vihecle with registration number {vehicle.RegNum} is now parked at spot {id}." };
+                    TempData["AlertMessage"] = JsonConvert.SerializeObject(feedback);
+
+                    return RedirectToAction(nameof(Index), "Overview");
+                }
+                else
+                {
+                    Feedback feedback = new Feedback() { status = "ok", message = $"Vehicle with registration number {vehicle.RegNum} already exist in the garage." };
+                    TempData["AlertMessage"] = JsonConvert.SerializeObject(feedback);
+                }
+
+            }
+
+            return View(vehicle);
+        }
+
+        private async Task<bool> VehicleExists(Vehicle vehicle)
+        {
+            return await _context.Vehicle.AnyAsync(e => e.RegNum == vehicle.RegNum);
+        }
     }
 }

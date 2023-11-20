@@ -122,23 +122,25 @@ namespace Garage3.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Park(Vehicle vehicle, int id)
         {
-            vehicle.ParkingTime = DateTime.Now;
-            vehicle.Address = id;
+            //vehicle.Spots.
+            //vehicle.ParkingTime = DateTime.Now;
+            //vehicle.Address = id;
+            var test = vehicle;
             if (ModelState.IsValid)
             {
-                if (!await VehicleExists(vehicle))
+                if (!await _service.VehicleExists(vehicle))
                 {
-                    _context.Add(vehicle);
-                    await _context.SaveChangesAsync();
-                    Feedback feedback = new Feedback() { status = "ok", message = $"Vihecle with registration number {vehicle.RegNum} is now parked at spot {id}." };
-                    TempData["AlertMessage"] = JsonConvert.SerializeObject(feedback);
+                    await _service.AddVehicle(vehicle);
+                    //await _context.SaveChangesAsync();
+                    //Feedback feedback = new Feedback() { status = "ok", message = $"Vihecle with registration number {vehicle.RegNum} is now parked at spot {id}." };
+                    //TempData["AlertMessage"] = JsonConvert.SerializeObject(feedback);
 
                     return RedirectToAction(nameof(Index), "Overview");
                 }
                 else
                 {
-                    Feedback feedback = new Feedback() { status = "ok", message = $"Vehicle with registration number {vehicle.RegNum} already exist in the garage." };
-                    TempData["AlertMessage"] = JsonConvert.SerializeObject(feedback);
+                    //Feedback feedback = new Feedback() { status = "ok", message = $"Vehicle with registration number {vehicle.RegNum} already exist in the garage." };
+                    //TempData["AlertMessage"] = JsonConvert.SerializeObject(feedback);
                 }
 
             }
@@ -146,9 +148,6 @@ namespace Garage3.Web.Controllers
             return View(vehicle);
         }
 
-        private async Task<bool> VehicleExists(Vehicle vehicle)
-        {
-            return await _context.Vehicle.AnyAsync(e => e.RegNum == vehicle.RegNum);
-        }
+
     }
 }

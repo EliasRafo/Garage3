@@ -82,5 +82,10 @@ namespace Garage3.Persistence.Services
                 .Include(s => s.Garage)
                 .ToListAsync();
         }
+
+        public async Task<bool> VehicleExists(Vehicle vehicle)
+        {
+            return await _context.Vehicle.AnyAsync(e => e.RegNum == vehicle.RegNum);
+        }
     }
 }

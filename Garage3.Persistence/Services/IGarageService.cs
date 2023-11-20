@@ -24,5 +24,7 @@ namespace Garage3.Persistence.Services
         public Task<IEnumerable<Spot>> GetSpot();
 
         public Task<int> GetCurrentlyParked();
+
+        public Task<bool> VehicleExists(Vehicle vehicle);
     }
 }

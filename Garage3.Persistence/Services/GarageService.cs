@@ -74,9 +74,29 @@ namespace Garage3.Persistence.Services
 
         public async Task<IEnumerable<Spot>> GetSpot() 
         { // add customer information
+            //var a = await _context.Garage.Where(s => s.Spots.Any(s=>s.Active==true));
+        //.ThenInclude(v => v.VehicleType)
+        //.ThenInclude(s => s.Garage)
+        //.ToListAsync());
+
+        //.Include(s => s.Vehicle)
+        //.ThenInclude(v => v.VehicleType)
+        //.ThenInclude(s => s.Garage)
+        //.ToListAsync();
+        //var a = await _context.Spot.Where(s => s.Active == true)
+        //.Include(s => s.Vehicle)
+        //.ThenInclude(v => v.VehicleType)
+        //.Include(s => s.Vehicle.Customer)
+
+        //.Include(s => s.Garage)
+
+        //.ToListAsync();
+
+            // Change to use of viewmodel+Select, discuss what data we need.
             return await _context.Spot.Where(s => s.Active == true)
         .Include(s => s.Vehicle)
         .ThenInclude(v => v.VehicleType)
+        .Include(s => s.Vehicle.Customer)
         .Include(s => s.Garage)
         .ToListAsync();
         }

@@ -40,6 +40,7 @@ namespace Garage3.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Search(string ssnumber)
         {
+            // 19881022 1234
            // if (Regex.IsMatch(searchField, @"^(19|20)?[0-9]{2}[0-9]{2}(0?[1-9]|1[012])(0[1-9]|[12]\d|3[01])[-]? [0-9]{4}$"))  
             {
                 var member = await _garageService.IsMember(ssnumber);

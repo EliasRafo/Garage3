@@ -11,18 +11,31 @@ namespace Garage3.Persistence.Services
 {
     public interface IGarageService
     {
+        // Asynchronously gets the capacity of the garage.
         public Task<int> GetCapacity();
+
+        // Asynchronously gets a list of VehicleTypesDto containing the vehicle types and their counts.
         public Task<List<VehicleTypesDto>> GetVehicleTypes();
+
+        // Asynchronously gets the number of customers.
         public Task<int> GetCustomerNumber();
+
+        // Asynchronously gets the total number of vehicles.
         public Task<int> GetVehiclesNumber();
 
+        // Asynchronously checks if a customer with a given Social Security Number (ssn) is a member.
         public Task<Customer> IsMember(string ssn);
 
+        // Asynchronously gets a list of vehicle types.
         public Task<List<VehicleType>> GetTypes();
+
+        // Asynchronously adds a vehicle to the database.
         public Task<bool> AddVehicle(Vehicle vehicle);
 
+        // Asynchronously gets a list of currently active spots with associated vehicle and garage information.
         public Task<IEnumerable<Spot>> GetSpot();
 
+        // Asynchronously gets the number of currently parked vehicles.
         public Task<int> GetCurrentlyParked();
     }
 }

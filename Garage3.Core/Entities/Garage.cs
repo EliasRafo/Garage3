@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace Garage3.Core.Entities
 {
-    // This class represents a Garage entity in the database.
     public class Garage
     {
         public int Id { get; set; }
-        public int SpotId { get; set; }
+        //public int SpotId { get; set; }
         public string GarageName { get; set; }
         public int Capacity { get; set; }
         //public in BlockSize { get; set; }

@@ -72,6 +72,7 @@ namespace Garage3.Persistence.Services
             }
         }
 
+
         public async Task<IEnumerable<Spot>> GetSpot() 
         { 
             // Change to use of viewmodel+Select, discuss what data we need.
@@ -81,6 +82,29 @@ namespace Garage3.Persistence.Services
                 .Include(s => s.Vehicle.Customer)
                 .Include(s => s.Garage)
                 .ToListAsync();
+        }
+
+        public async Task<Customer> GetCustomerByID(int id)
+        {
+            Customer x = await _context.Customer.Where(s => s.Id == id).FirstOrDefaultAsync();
+            return x;
+        }
+
+        public async Task<Spot> GetSpotByID(int id)
+        {
+            return await _context.Spot.Where(s => s.Id == id)
+                .Include(s => s.Vehicle)
+                .ThenInclude(v => v.VehicleType)
+                .Include(s => s.Vehicle.Customer)
+                .Include(s => s.Garage).FirstOrDefaultAsync();
+        }
+
+        public async void UpdateSpot(Spot spot)
+        {
+            var s = _context.Spot.First(a => a.Id == spot.Id);
+            s.Active = false;
+            s.CheckOut = spot.CheckOut;
+            await _context.SaveChangesAsync();
         }
 
         public async Task<bool> VehicleExists(Vehicle vehicle)

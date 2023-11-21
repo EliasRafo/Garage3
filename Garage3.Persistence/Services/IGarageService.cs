@@ -25,6 +25,12 @@ namespace Garage3.Persistence.Services
 
         public Task<int> GetCurrentlyParked();
 
+        public Task<Customer> GetCustomerByID(int id);
+
+        public Task<Spot> GetSpotByID(int id);
+
+        public void UpdateSpot(Spot spot);
+
         public Task<bool> VehicleExists(Vehicle vehicle);
     }
 }

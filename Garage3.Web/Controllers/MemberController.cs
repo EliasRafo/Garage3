@@ -190,7 +190,7 @@ namespace Garage3.Web.Controllers
 
     TimeSpan duration = CheckOut - spot.CheckIn;
 
-                var pr = Math.Floor(duration.TotalMinutes * 1);
+                var pr = Math.Floor(duration.TotalMinutes * 1) + 20;
 
                 var model = new ReceiptViewModel()
                 {

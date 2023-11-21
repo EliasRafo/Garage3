@@ -8,6 +8,7 @@
 
     @if(Model.CustomerAge>18)
     {
+        <a asp-action="AddVehicle" asp-route-id="@Model.Customer.Id">Add vehicle</a>
         <div class="container mt-5">
             <div class="row">
 
@@ -43,7 +44,7 @@
                                             </ul>
                                             @if (item.Spot.Vehicle.CustomerId == Model.Customer.Id)
                                             {
-                                                <a class="btn btn-danger" asp-controller="Vehicles" asp-action="Unparking" asp-route-id="@item.Spot.Id">Check Out</a>
+                                                <a class="btn btn-danger" asp-controller="Member" asp-action="CheckOut" asp-route-id="@item.Spot.Id">Check Out</a>
                                             }
                                             else
                                             {

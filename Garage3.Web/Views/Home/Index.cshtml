@@ -4,6 +4,13 @@
 }
 
 <div class="text-center">
+
+    @if (@TempData["AlertMessage"] != null)
+    {
+        string message = TempData["AlertMessage"].ToString();
+        <message message="@message"></message>
+    }
+
     <h1 class="display-4">Welcome to garage</h1>
 
     <p>You have to be registered in garage to check in/out your vehicle.</p>

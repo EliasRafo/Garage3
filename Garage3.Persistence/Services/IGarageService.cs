@@ -39,5 +39,15 @@ namespace Garage3.Persistence.Services
 
         // Asynchronously gets the number of currently parked vehicles.
         public Task<int> GetCurrentlyParked();
+
+        public Task<Customer> GetCustomerByID(int id);
+
+        public Task<Spot> GetSpotByID(int id);
+
+        public void UpdateSpot(Spot spot);
+
+        public Task<IEnumerable<Customer>> GetCustomers();
+
+        public Task<IEnumerable<Vehicle>> GetVehiclesByCustomerId(int id);
     }
 }

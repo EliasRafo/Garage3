@@ -97,24 +97,13 @@ namespace Garage3.Persistence.Services
             }
         }
 
-        // Method to asynchronously get a list of currently active spots with associated vehicle and garage information.
-        public async Task<IEnumerable<Spot>> GetSpot()
-        {
-            // Retrieves a list of spots with Active set to true, including related vehicle and garage information.
-            // Include customer data
-            return await _context.Spot
-                .Where(s => s.Active == true)
-                .Include(s => s.Vehicle)
-                    .ThenInclude(v => v.VehicleType)
-                .Include(s => s.Garage)
-                .ToListAsync();
-        }
-
-        public async Task CreateCustomer(Customer customer)
-        {
-            // Add the new customer to the database.
-            _context.Add(customer);
-            await _context.SaveChangesAsync();
+        public async Task<IEnumerable<Spot>> GetSpot() 
+        { // add customer information
+            return await _context.Spot.Where(s => s.Active == true)
+        .Include(s => s.Vehicle)
+        .ThenInclude(v => v.VehicleType)
+        .Include(s => s.Garage)
+        .ToListAsync();
         }
     }
 

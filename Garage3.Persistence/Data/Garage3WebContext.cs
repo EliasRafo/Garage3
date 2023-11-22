@@ -35,16 +35,7 @@ namespace Garage3.Persistence.Data
         // Method for configuring the model that defines the shape of the entities and their relationships in the database.
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // code is a sample configuration for a many-to-many relationship between Vehicle and Spot entities,
-            // using an intermediary entity called Spot.
-
-            // modelBuilder.HasMany(s => s.Vehicle)
-            //     .WithMany(c => c.Spot)
-            //     .UsingEntity<Spot>(
-            //         e => e.HasOne(e => e.Vehicle).WithMany(c => c.Spot),
-            //         e => e.HasKey(e => new { e.VehicleId, e.SpotId }));
-
-            // Calls the base implementation of OnModelCreating to apply additional configurations.
+            
             base.OnModelCreating(modelBuilder);
         }
     }

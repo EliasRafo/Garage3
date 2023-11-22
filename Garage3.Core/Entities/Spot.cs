@@ -12,7 +12,7 @@ namespace Garage3.Core.Entities
         public int Id { get; set; }
         public bool Active { get; set; }
         public DateTime CheckIn { get; set; }
-        public DateTime CheckOut { get; set; }
+        public DateTime? CheckOut { get; set; }
 
         public int Address { get; set; }
 

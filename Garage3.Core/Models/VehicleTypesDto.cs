@@ -1,7 +1,5 @@
-﻿
-using Garage3.Core.Entities;
+﻿namespace Garage3.Core.Models
 
-namespace Garage3.Core.Models
 {
     public class ParkingSpot
     {

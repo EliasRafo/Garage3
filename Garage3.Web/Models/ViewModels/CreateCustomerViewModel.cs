@@ -6,7 +6,6 @@ namespace Garage3.Web.Models.ViewModels
     public class CreateCustomerViewModel
     {
 
-      
             [Required]
             [DisplayName("First name")]
             [StringLength(10, MinimumLength = 3)]

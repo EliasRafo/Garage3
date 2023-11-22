@@ -15,12 +15,14 @@
         <span asp-validation-for="FirstName" class="text-danger"></span>
     </div>
     <div class="input-group inputs">
-        <label for="LastName">Last Name:</label>
-        <input type="text" name="LastName" required>
+        <label asp-for="LastName" class="control-label"></label>
+        <input type="text" asp-for="LastName" class="form-control"/>
+        <span asp-validation-for="LastName" class="text-danger"></span>
     </div>
     <div class="input-group inputs">
-        <label for="SocialNum">Social Security Number:</label>
-        <input type="text" name="SocialNum" pattern="^(19|20)\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])[-]\d{4}$" required>
+        <label asp-for="SocialNum" class="control-label"></label>
+        <input type="text" asp-for="SocialNum" class="form-control" />
+        <span asp-validation-for="SocialNum" class="text-danger"></span>
     </div>
     <input type="submit" value="Create Customer">
 </form>

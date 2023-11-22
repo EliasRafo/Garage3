@@ -17,5 +17,6 @@ namespace Garage3.Core.Entities
         //Navigation property
         public ICollection<Vehicle> Vehicles { get; set; }
         public object Membership { get; set; }
+        public string Name { get; set; }
     }
 }

@@ -1,10 +1,15 @@
-﻿using Garage3.Web.Models.ViewModels;
-using Garage3.Persistence.Services;
+﻿using Garage3.Core.Entities;
+using Garage3.Core.Models;
+using Garage3.Web.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Query;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace Garage3.Web.Controllers
+namespace Garage3.Persistence.Services
 {
     public class AdminController : Controller
     {
@@ -51,13 +56,18 @@ namespace Garage3.Web.Controllers
             }
 
             var vehicles = await _garageService.GetVehiclesByCustomerId(customerId);
+            if (vehicles == null || !vehicles.Any())
+            {
+                return NotFound("No vehicles found for this customer.");
+            }
+
             var vehicle = vehicles.FirstOrDefault();
 
             var viewModel = new OverviewViewModel
             {
                 Owner = customer.Name,
                 MembershipType = customer.Membership.Type,
-                VehicleType = vehicle.Type.Name,
+                VehicleType = vehicle.VehicleType.Name,
                 RegNum = vehicle.RegistrationNumber,
                 ParkDuration = TimeSpan.FromHours(1)
             };
@@ -65,4 +75,4 @@ namespace Garage3.Web.Controllers
             return View(viewModel);
         }
     }
-}
+}         

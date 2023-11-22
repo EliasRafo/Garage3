@@ -57,7 +57,7 @@ namespace Garage3.Web.Controllers
                 };
                 await _garageService.CreateCustomer(customer);
 
-                return RedirectToAction("Index", "Member", new { id = customer.Id });
+                return RedirectToAction("Index", "Member", customer);
             }
 
             return View(model);

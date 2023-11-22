@@ -15,7 +15,6 @@ namespace Garage3.Persistence.Services
     public class GarageService : IGarageService
     {
         private readonly Garage3WebContext _context;
-
         public GarageService(Garage3WebContext context)
         {
             _context = context;
@@ -29,10 +28,7 @@ namespace Garage3.Persistence.Services
 
         public async Task<List<VehicleTypesDto>> GetVehicleTypes()
         {
-            return await _context.Vehicle
-                .GroupBy(x => x.VehicleType.Type)
-                .Select(grp => new VehicleTypesDto(grp.Key, grp.Count()))
-                .ToListAsync();
+            return await _context.Vehicle.GroupBy(x => x.VehicleType.Type).Select(grp => new VehicleTypesDto(grp.Key, grp.Count())).ToListAsync();
         }
 
         public async Task<int> GetCustomerNumber()
@@ -64,7 +60,6 @@ namespace Garage3.Persistence.Services
         public async Task<bool> AddVehicle(Vehicle vehicle)
         {
             var v = _context.Vehicle.Where(e => e.RegNum.StartsWith(vehicle.RegNum)).FirstOrDefault();
-
             if (v is null)
             {
                 _context.Add(vehicle);
@@ -77,44 +72,76 @@ namespace Garage3.Persistence.Services
             }
         }
 
-        public async Task<IEnumerable<Spot>> GetSpot() 
-        { // add customer information
+
+        public async Task<IEnumerable<Spot>> GetSpot()
+        {
+            // Change to use of viewmodel+Select, discuss what data we need.
             return await _context.Spot.Where(s => s.Active == true)
-        .Include(s => s.Vehicle)
-        .ThenInclude(v => v.VehicleType)
-        .Include(s => s.Garage)
-        .ToListAsync();
+                .Include(s => s.Vehicle)
+                .ThenInclude(v => v.VehicleType)
+                .Include(s => s.Vehicle.Customer)
+                .Include(s => s.Garage)
+                .ToListAsync();
         }
 
-        public Task CreateCustomer(Customer customer)
+        public async Task<Customer> GetCustomerByID(int id)
         {
-            throw new NotImplementedException();
+            Customer x = await _context.Customer.Where(s => s.Id == id).FirstOrDefaultAsync();
+            return x;
         }
 
-        public Task<Customer> GetCustomerByID(int id)
+        public async Task<Spot> GetSpotByID(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Spot.Where(s => s.Id == id)
+                .Include(s => s.Vehicle)
+                .ThenInclude(v => v.VehicleType)
+                .Include(s => s.Vehicle.Customer)
+                .Include(s => s.Garage).FirstOrDefaultAsync();
         }
 
-        public Task<Spot> GetSpotByID(int id)
+        //    public async Task<IEnumerable<Spot>> GetSpot() 
+        //    { // add customer information
+        //        return await _context.Spot.Where(s => s.Active == true)
+        //    .Include(s => s.Vehicle)
+        //    .ThenInclude(v => v.VehicleType)
+        //    .Include(s => s.Garage)
+        //    .ToListAsync();
+        //    }
+        public async void UpdateSpot(Spot spot)
         {
-            throw new NotImplementedException();
+            var s = _context.Spot.First(a => a.Id == spot.Id);
+            s.Active = false;
+            s.CheckOut = spot.CheckOut;
+            await _context.SaveChangesAsync();
         }
 
-        public void UpdateSpot(Spot spot)
+        public async Task<IEnumerable<Customer>> GetCustomers()
         {
-            throw new NotImplementedException();
+            return await _context.Customer.ToListAsync();
         }
 
-        public Task<IEnumerable<Customer>> GetCustomers()
+        public async Task<IEnumerable<Vehicle>> GetVehiclesByCustomerId(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Vehicle.Where(v => v.CustomerId == id)
+                .Include(v => v.VehicleType).ToListAsync();
         }
 
-        public Task<IEnumerable<Vehicle>> GetVehiclesByCustomerId(int id)
+        public async Task<bool> CreateCustomer(Customer customer)
         {
-            throw new NotImplementedException();
+            var existingCustomer = await _context.Customer
+                 .Where(c => c.SocialNum == customer.SocialNum)
+                 .FirstOrDefaultAsync();
+
+            if (existingCustomer is null)
+            {
+                _context.Add(customer);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
-
 }

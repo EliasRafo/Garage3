@@ -35,6 +35,6 @@ namespace Garage3.Persistence.Services
 
         public Task<IEnumerable<Vehicle>> GetVehiclesByCustomerId(int id);
 
-        public Task CreateCustomer(Customer customer);
+        Task<bool> CreateCustomer(Customer customer);
     }
 }

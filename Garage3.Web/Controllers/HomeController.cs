@@ -25,14 +25,14 @@ namespace Garage3.Web.Controllers
             OverviewViewModel overviewViewModel = new OverviewViewModel();
 
             
-            overviewViewModel.Capacity = await _garageService.GetCapacity();
+            //overviewViewModel.Capacity = await _garageService.GetCapacity();
             
-            overviewViewModel.VehiclesStatistic = await _garageService.GetVehicleTypes();
-            overviewViewModel.CustomerNumber = await _garageService.GetCustomerNumber();
+            //overviewViewModel.VehiclesStatistic = await _garageService.GetVehicleTypes();
+            //overviewViewModel.CustomerNumber = await _garageService.GetCustomerNumber();
 
-            overviewViewModel.VehiclesNumber = await _garageService.GetVehiclesNumber();
+            //overviewViewModel.VehiclesNumber = await _garageService.GetVehiclesNumber();
 
-            overviewViewModel.CurrentlyParked = await _garageService.GetCurrentlyParked();
+            //overviewViewModel.CurrentlyParked = await _garageService.GetCurrentlyParked();
 
             return View(nameof(Index), overviewViewModel);
         }

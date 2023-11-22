@@ -66,7 +66,7 @@ namespace Garage3.Persistence.Services
             var viewModel = new OverviewViewModel
             {
                 Owner = customer.Name,
-                MembershipType = customer.Membership.GetType,
+                //MembershipType = customer.Membership.GetType,
                 VehicleType = vehicle.VehicleType.Name,
                 RegNum = vehicle.RegistrationNumber,
                 ParkDuration = TimeSpan.FromHours(1)

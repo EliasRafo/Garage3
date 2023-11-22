@@ -13,8 +13,7 @@ namespace Garage3.Web.Controllers
         private readonly Garage3WebContext _context;
         private readonly IGarageService _garageService;
 
-        public AdminController(Garage3WebContext context)
-        public AdminController(IGarageService garageService)
+        public AdminController(IGarageService garageService, Garage3WebContext context)
         {
             _context = context;
             _garageService = garageService;
@@ -24,31 +23,31 @@ namespace Garage3.Web.Controllers
             return View();
         }
 
-        public IActionResult Overview()
+       // public IActionResult Overview()
         public async Task<IActionResult> Customer()
         {
-            var viewModel = new OverviewViewModel
+            //var viewModel = new OverviewViewModel
             return View(await _garageService.GetCustomers());
         }
 
         public async Task<IActionResult> Details(int? id)
         {
-                Capacity = _context.Garages.FirstOrDefault()?.Capacity ?? 0,
-                CustomerNumber = _context.Customers.Count(),
-                VehiclesNumber = _context.Vehicles.Count(),
-                CurrentlyParked = _context.Vehicles.Count(v => v.Parked),
-                VehiclesStatistic = _context.Vehicles.GroupBy(v => v.GetType)
-                                    .Select(group => new VehicleTypesDto
-            if (id == null)
-            {
-                                        Type = group.Key,
-                                        Count = group.Count()
-                                    }).ToList(),
-                ParkedVehicles = _context.Vehicles
-                    .Where(v => v.Parked)
-                    .Select(v => new ParkedVehicleViewModel
-                return NotFound();
-            }
+            //    Capacity = _context.Garages.FirstOrDefault()?.Capacity ?? 0,
+            //    CustomerNumber = _context.Customers.Count(),
+            //    VehiclesNumber = _context.Vehicles.Count(),
+            //    CurrentlyParked = _context.Vehicles.Count(v => v.Parked),
+            //    VehiclesStatistic = _context.Vehicles.GroupBy(v => v.GetType)
+            //                        .Select(group => new VehicleTypesDto
+            //if (id == null)
+            //{
+            //                            Type = group.Key,
+            //                            Count = group.Count()
+            //                        }).ToList(),
+            //    ParkedVehicles = _context.Vehicles
+            //        .Where(v => v.Parked)
+            //        .Select(v => new ParkedVehicleViewModel
+            //    return NotFound();
+            //}
 
             var vehicles = await _garageService.GetVehiclesByCustomerId((int)id);
             if (vehicles == null)
@@ -64,7 +63,6 @@ namespace Garage3.Web.Controllers
             }
 
             return View(viewModel);
-            return View(vehicles);
         }
     }
 }

@@ -9,6 +9,8 @@ namespace Garage3.Core.Entities
 {
     public class Spot
     {
+        public object Location;
+
         public int Id { get; set; }
         public bool Active { get; set; }
         public DateTime CheckIn { get; set; }
@@ -28,5 +30,6 @@ namespace Garage3.Core.Entities
 
         //Navigation property
         public Vehicle Vehicle { get; set; }
+        public object Status { get; set; }
     }
 }

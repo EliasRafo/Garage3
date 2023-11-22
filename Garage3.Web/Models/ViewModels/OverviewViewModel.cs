@@ -7,7 +7,7 @@ namespace Garage3.Web.Models.ViewModels
     
     {
         public string? Owner { get; set; }
-        public string? MembershipType { get; set; }
+        public string? Spot { get; set; }
         public string? VehicleType { get; set; }
         public string? RegNum { get; set; }
         public TimeSpan ParkDuration { get; set; }

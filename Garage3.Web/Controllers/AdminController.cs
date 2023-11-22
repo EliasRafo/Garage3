@@ -46,7 +46,6 @@ namespace Garage3.Persistence.Services
 
             return View(vehicles);
         }
-
         public async Task<IActionResult> Overview(int customerId)
         {
             var customer = await _garageService.GetCustomerByID(customerId);
@@ -62,17 +61,19 @@ namespace Garage3.Persistence.Services
             }
 
             var vehicle = vehicles.FirstOrDefault();
+            var spot = await _garageService.GetSpotByID(vehicle.Id);
 
             var viewModel = new OverviewViewModel
             {
                 Owner = customer.Name,
-                //MembershipType = customer.Membership.GetType,
                 VehicleType = vehicle.VehicleType.Name,
                 RegNum = vehicle.RegistrationNumber,
-                ParkDuration = TimeSpan.FromHours(1)
+                ParkDuration = TimeSpan.FromHours(1),
+                Spot = spot != null ? $"{spot.Location} - {spot.Status}" : "Not Parked"
             };
 
             return View(viewModel);
         }
+
     }
 }         

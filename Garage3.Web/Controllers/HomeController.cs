@@ -44,16 +44,23 @@ namespace Garage3.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateCustomer(CustomerViewModel model)
+        public async Task<IActionResult> CreateCustomer(CreateCustomerViewModel model)
         {
             if (ModelState.IsValid)
             {
-                await _garageService.CreateCustomer(model.Customer);
+                var customer = new Customer
+                {
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    SocialNum = model.SocialNum
 
-                return RedirectToAction("Index", "Member", new { id = model.Customer.Id });
+                };
+                await _garageService.CreateCustomer(customer);
+
+                return RedirectToAction("Index", "Member", new { id = customer.Id });
             }
 
-            return View("CreateCustomer", model);
+            return View(model);
         }
 
         [ValidateAntiForgeryToken]

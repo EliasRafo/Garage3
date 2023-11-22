@@ -1,7 +1,6 @@
 ﻿using Garage3.Core.Entities;
 using Garage3.Core.Models;
 using Microsoft.EntityFrameworkCore.Query;
-using System.ComponentModel.DataAnnotations;
 
 namespace Garage3.Web.Models.ViewModels
 {
@@ -13,4 +12,5 @@ namespace Garage3.Web.Models.ViewModels
 
         public List<ParkingSpot> ParkingSpots { get; set; }
     }
+
 }

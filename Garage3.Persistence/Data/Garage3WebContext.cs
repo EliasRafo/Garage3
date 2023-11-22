@@ -20,6 +20,16 @@ namespace Garage3.Persistence.Data
         }
 
         public DbSet<Vehicle> Vehicle { get; set; } = default!;
+        public DbSet<VehicleType> VehicleType { get; set; } = default!;
+        public DbSet<Garage> Garage { get; set; } = default!;
+        public DbSet<Spot> Spot { get; set; } = default!;
+        public DbSet<Customer> Customer { get; set; } = default!;
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            
+            base.OnModelCreating(modelBuilder);
+        }
         public object Garage { get; set; }
         public object Garages { get; set; }
     }

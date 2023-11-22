@@ -16,5 +16,5 @@ namespace Garage3.Web.Models.ViewModels
         public List<ParkedVehicleViewModel> ParkedVehicles { get; set; }
     }
 
-}
+    }
 }

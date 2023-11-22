@@ -1,0 +1,100 @@
+﻿@model Garage3.Web.Models.ViewModels.CustomerViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+
+    @if (@TempData["AlertMessage"] != null)
+    {
+        string message = TempData["AlertMessage"].ToString();
+        <message message="@message"></message>
+    }
+
+    
+    <h4 class="display-4">Welcome @Model.Customer.FullName</h4>
+    <span class="fs-3">Social security number: @Model.Customer.SocialNum</span>
+    <br />
+    @if(Model.CustomerAge>18)
+    {
+        <a class="btn btn-outline-primary" asp-action="AddVehicle" asp-route-id="@Model.Customer.Id">Add vehicle</a>
+        <div class="container mt-5">
+            <div class="row">
+
+                
+
+
+
+                @if (Model.ParkingSpots is not null)
+                {
+                    @foreach (var item in Model.ParkingSpots)
+                    {
+                                                
+                        <div class="col-lg-4 col-md-6 mb-3">
+
+                            <div class="card px-lg-5 h-100">
+                                <div class="card-body d-flex flex-column">
+                                    <div class="text-center">
+                                        <img src="https://imgs2.dab3games.com/draw-parking-game.png" class="card-img-top mb-2" alt="">
+                                    </div>
+
+                                    <div class="card-title mb-4 text-center fs-2">A @item.Id</div>
+                                    <div>
+
+                                        @if (item.Reserved == true)
+                                        {
+                                            @if (item.Spot.Vehicle.CustomerId == Model.Customer.Id)
+                                            {
+                                                <a class="btn btn-danger" asp-controller="Member" asp-action="CheckOut" asp-route-id="@item.Spot.Id">Check Out</a>
+
+                                            }
+                                            else
+                                            {
+                                                <h3 class="alert-danger">Reserved</h3>
+
+                                            }
+                                            <ul class="list-unstyled mt-3">
+                                                <li class="text-start">
+                                                    <span class="ms-3"><span class="fw-bold">Registration number:</span> @item.Spot.Vehicle.RegNum</span>
+                                                </li>
+                                                <li class="text-start">
+                                                    <span class="ms-3"><span class="fw-bold">Vehicle type:</span> @item.Spot.Vehicle.VehicleType.Type</span>
+                                                </li>
+                                                <li class="text-start">
+                                                    <span class="small ms-3"><span class="fw-bold">Parking time:</span> @item.Spot.CheckIn</span>
+                                                </li>
+                                            </ul>
+                                            
+
+                                        }
+                                        else
+                                        {
+                                            
+                                            <a class="btn btn-success" asp-controller="Vehicles" asp-action="Park" asp-route-id="@item.Id">Check In</a>
+                                            
+                                        }
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                    }
+                }
+
+            </div>
+        </div>
+    }
+    else
+    {
+        <h3 class="display-4">You are under 18</h3>
+    }
+
+
+
+</div>

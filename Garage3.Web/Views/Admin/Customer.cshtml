@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Garage3.Core.Entities.Customer>
+
+@{
+    ViewData["Title"] = "Customers";
+}
+
+<h1>Customers</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SocialNum)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SocialNum)
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">Vehicles</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

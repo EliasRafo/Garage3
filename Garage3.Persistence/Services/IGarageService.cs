@@ -30,5 +30,9 @@ namespace Garage3.Persistence.Services
         public Task<Spot> GetSpotByID(int id);
 
         public void UpdateSpot(Spot spot);
+
+        public Task<IEnumerable<Customer>> GetCustomers();
+
+        public Task<IEnumerable<Vehicle>> GetVehiclesByCustomerId(int id);
     }
 }

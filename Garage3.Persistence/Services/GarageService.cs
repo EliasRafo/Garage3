@@ -106,5 +106,16 @@ namespace Garage3.Persistence.Services
             s.CheckOut = spot.CheckOut;
             await _context.SaveChangesAsync();
         }
+
+        public async Task<IEnumerable<Customer>> GetCustomers()
+        {
+            return await _context.Customer.ToListAsync();
+        }
+
+        public async Task<IEnumerable<Vehicle>> GetVehiclesByCustomerId(int id)
+        {
+            return await _context.Vehicle.Where(v => v.CustomerId == id)
+                .Include(v => v.VehicleType).ToListAsync();
+        }
     }
 }

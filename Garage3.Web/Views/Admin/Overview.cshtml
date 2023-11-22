@@ -1,0 +1,35 @@
+﻿@model Garage3.Web.Models.ViewModels.OverviewViewModel
+
+<h2>Garage Overview</h2>
+
+<div>
+    <p>Total Capacity: @Model.Capacity</p>
+    <p>Total Customers: @Model.CustomerNumber</p>
+    <p>Total Vehicles: @Model.VehiclesNumber</p>
+    <p>Currently Parked Vehicles: @Model.CurrentlyParked</p>
+</div>
+
+<h3>Parked Vehicles</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Brand</th>
+            <th>Color</th>
+            <th>Model</th>
+            <th>Registration Number</th>
+            <th>Wheels Number</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var vehicle in Model.ParkedVehicles)
+        {
+            <tr>
+                <td>@vehicle.Brand</td>
+                <td>@vehicle.Color</td>
+                <td>@vehicle.Model</td>
+                <td>@vehicle.RegNum</td>
+                <td>@vehicle.WheelsNumber</td>
+            </tr>
+        }
+    </tbody>
+</table>

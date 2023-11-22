@@ -1,6 +1,8 @@
-﻿using Garage3.Persistence.Services;
+﻿using Garage3.Web.Models.ViewModels;
+using Garage3.Persistence.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Garage3.Web.Controllers
 {
@@ -12,6 +14,7 @@ namespace Garage3.Web.Controllers
         {
             _garageService = garageService;
         }
+
         public IActionResult Index()
         {
             return View();
@@ -19,7 +22,8 @@ namespace Garage3.Web.Controllers
 
         public async Task<IActionResult> Customer()
         {
-            return View(await _garageService.GetCustomers());
+            var customers = await _garageService.GetCustomers();
+            return View(customers);
         }
 
         public async Task<IActionResult> Details(int? id)
@@ -36,6 +40,29 @@ namespace Garage3.Web.Controllers
             }
 
             return View(vehicles);
+        }
+
+        public async Task<IActionResult> Overview(int customerId)
+        {
+            var customer = await _garageService.GetCustomerByID(customerId);
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            var vehicles = await _garageService.GetVehiclesByCustomerId(customerId);
+            var vehicle = vehicles.FirstOrDefault();
+
+            var viewModel = new OverviewViewModel
+            {
+                Owner = customer.Name,
+                MembershipType = customer.Membership.Type,
+                VehicleType = vehicle.Type.Name,
+                RegNum = vehicle.RegistrationNumber,
+                ParkDuration = TimeSpan.FromHours(1)
+            };
+
+            return View(viewModel);
         }
     }
 }

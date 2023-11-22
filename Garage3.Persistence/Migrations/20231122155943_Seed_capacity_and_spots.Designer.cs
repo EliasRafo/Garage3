@@ -4,6 +4,7 @@ using Garage3.Persistence.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Garage3.Persistence.Migrations
 {
     [DbContext(typeof(Garage3WebContext))]
-    partial class Garage3WebContextModelSnapshot : ModelSnapshot
+    [Migration("20231122155943_Seed_capacity_and_spots")]
+    partial class Seed_capacity_and_spots
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

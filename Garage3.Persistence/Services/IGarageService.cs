@@ -20,10 +20,14 @@ namespace Garage3.Persistence.Services
 
         public Task<ICollection<Vehicle>> GetVehiclesByCustomerID(int id);
 
-        public Task<Vehicle> GetVehicleByID(int VehicleId);
+        public Task<Vehicle?> GetVehicleByID(int VehicleId);
+
+        public Task<bool> VehicleIsParked(int VehicleId);
 
         public Task<List<VehicleType>> GetTypes();
         public Task<bool> AddVehicle(Vehicle vehicle);
+
+        public Task<bool> ParkVehicle(ParkVihecle parkVihecle);
 
         public Task<IEnumerable<Spot>> GetSpot();
 

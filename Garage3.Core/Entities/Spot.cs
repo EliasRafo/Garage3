@@ -12,7 +12,7 @@ namespace Garage3.Core.Entities
         public int Id { get; set; }
         public bool Active { get; set; }
         public DateTime CheckIn { get; set; }
-        public DateTime? CheckOut { get; set; }
+        public DateTime CheckOut { get; set; }
 
         
         public int Address { get; set; }
@@ -24,7 +24,7 @@ namespace Garage3.Core.Entities
         public Garage Garage { get; set; }
 
         // Foreign Key
-        public int VehicleId { get; set; }
+        public int? VehicleId { get; set; }
 
         //Navigation property
         public Vehicle Vehicle { get; set; }

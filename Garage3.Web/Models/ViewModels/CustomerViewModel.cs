@@ -19,6 +19,7 @@ namespace Garage3.Web.Models.ViewModels
 
         public int VehicleId { get; set; }
 
+        public int Spotid { get; set; }
 
 
         //Customer and vehicle should be replaced by properties for the properties we use from the models(to exclude unused properties)

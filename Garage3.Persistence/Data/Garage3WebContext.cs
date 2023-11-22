@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Garage3.Core.Entities;
+using System.Net;
 
 namespace Garage3.Persistence.Data
 {
@@ -24,6 +25,31 @@ namespace Garage3.Persistence.Data
         {
             
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Garage>().HasData(new Garage
+            {
+                Id = 1,
+                Capacity = 20,
+                GarageName = "Garage3"
+            });
+            List<Spot> spots = new List<Spot>();
+            for (int i = 1; i <= 20; i++) {
+                Spot spot = new Spot()
+                {
+                    Id = i,
+                    Active = false,
+                    CheckIn = DateTime.Now,
+                    CheckOut = DateTime.Now,
+                    Address = i,
+                    GarageId = 1
+                };
+                spots.Add(spot);
+            }
+            modelBuilder.Entity<Spot>().HasData(spots);
+
+                
+                
+
+           
         }
     }
 }

@@ -4,8 +4,6 @@ using System.ComponentModel.DataAnnotations;
 namespace Garage3.Web.Models.ViewModels
 {
     public class OverviewViewModel
-    {
-        public int Capacity { get; set; }
 
         public int CustomerNumber { get; set; }
 

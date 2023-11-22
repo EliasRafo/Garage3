@@ -237,13 +237,27 @@ namespace Garage3.Web.Controllers
         [HttpPost, ActionName("Park")]
 
         [ValidateAntiForgeryToken]
-        //Angels crying over the use of customerViewModel to pass vehicle id. Works cause binds to vehicleId and is diffren inparameters than httpget Park?
         public async Task<IActionResult> ParkPost(int vehicleId, int customerId, int spotId)//, int Spotid)
         {
             CustomerViewModel customerViewModel = new CustomerViewModel();
             var vehicle = await _service.GetVehicleByID(vehicleId);
             // Add if spot if still free.
+            if (!await _service.SpotFree(spotId)){
+                //Feedback feedback = new Feedback() { status = "ok", message = $"Vehicle with registration number {vehicle.RegNum} already exist in the garage."};
+                //TempData["AlertMessage"] = JsonConvert.SerializeObject(feedback);
+                Customer customerinfo = await _service.GetCustomerByID(customerId);
+                customerViewModel = await CreateCustomerViewModel(customerinfo);
+                customerViewModel.SelectListVihecles = customerinfo.Vehicles.Select(v =>
+                new SelectListItem
+                {
+                    Value = v.Id.ToString(),
+                    Text = $"{v.RegNum} , {v.Brand} , {v.Model}"
+                });
+
+                return View(customerViewModel);
+            };
             // check if vehicle exist.
+            if (!await _service.VehicleExists(vehicleId)) throw new ArgumentException("Something went terrible wrong, Vihecle does not exist, we will find you to take care of the matter.");
             if (!await _service.VehicleIsParked(vehicleId))
             {
                 //await _service.AddVehicle(vehicle);

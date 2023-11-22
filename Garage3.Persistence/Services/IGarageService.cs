@@ -40,5 +40,9 @@ namespace Garage3.Persistence.Services
         public void UpdateSpot(Spot spot);
 
         public Task<bool> VehicleExists(Vehicle vehicle);
+
+        public Task<bool> SpotFree(int SpotId);
+
+        public Task<bool> VehicleExists(int VehicleId);
     }
 }

@@ -152,6 +152,16 @@ namespace Garage3.Persistence.Services
             return await _context.Vehicle.Where(e => e.Id == VehicleId).Include(e=>e.Customer).FirstOrDefaultAsync();
         }
 
+        public async Task<bool> VehicleExists(int VehicleId)
+        {
+            return await _context.Vehicle.AnyAsync(e => e.Id == VehicleId);
+        }
+
+        public async Task<bool> SpotFree(int SpotId)
+        {
+            return await _context.Spot.AnyAsync(e => e.Id == SpotId);
+        }
+
         public async Task<bool> VehicleIsParked(int VehicleId)
         {
 

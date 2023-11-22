@@ -28,8 +28,17 @@ namespace Garage3.Web.Controllers
         }
         public async Task<IActionResult> Index(Customer customer)
         {
+            //ASK ELIAS FROM WHERE CUSTOMER IS SENT.
+            //Customer customerinfo = await _service.GetCustomerByID(customer.Id);
             CustomerViewModel customerViewModel = await CreateCustomerViewModel(customer);
-            
+            //Add control for not selectig of parked vehicles.
+            //customerViewModel.SelectListVihecles =  customerinfo.Vehicles.Select(v =>
+            //              new SelectListItem
+            //              {
+            //                  Value = v.Id.ToString(),
+            //                  Text = $"{v.RegNum} , {v.Brand} , {v.Model}"
+            //              });
+
             return View(customerViewModel);
             
         }
@@ -188,7 +197,7 @@ namespace Garage3.Web.Controllers
 
                 _service.UpdateSpot(s);
 
-    TimeSpan duration = CheckOut - spot.CheckIn;
+                 TimeSpan duration = CheckOut - spot.CheckIn;
 
                 var pr = Math.Floor(duration.TotalMinutes * 1) + 20;
 
@@ -203,22 +212,36 @@ namespace Garage3.Web.Controllers
                 return View("Receipt", model);
             }
 
+
+
+            return RedirectToAction(nameof(Index));
+        }
+
         [HttpGet]
-        public IActionResult Park(Vehicle vehicle)//Park() TEST
+        public async Task<IActionResult> Park(int costumerID)
         {
-            //TEST
-            var a=vehicle;
-            return View();
+            //---Needs to be changed//Add query to customerwuery.
+            Customer customerinfo = await _service.GetCustomerByID(costumerID);
+            CustomerViewModel customerViewModel = await CreateCustomerViewModel(customerinfo);
+
+            customerViewModel.SelectListVihecles = customerinfo.Vehicles.Select(v =>
+                         new SelectListItem
+                         {
+                             Value = v.Id.ToString(),
+                             Text = $"{v.RegNum} , {v.Brand} , {v.Model}"
+                         });
+            //---Needs to be changed//Add query to customerwuery.
+
+            return View(customerViewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Park(Vehicle vehicle, int id)
+        public async Task<IActionResult> Park(CustomerViewModel customerViewModel,int VehicleId)
         {
-            //vehicle.Spots.
-            //vehicle.ParkingTime = DateTime.Now;
-            //vehicle.Address = id;
-            var test = vehicle;
+            var vehicle = await _service.GetVehicleByID(VehicleId);
+            //GET vehicles and vehicle types
+            //var vehicle = await _service.GetVehiclesByCustomerID(id);
             if (ModelState.IsValid)
             {
                 if (!await _service.VehicleExists(vehicle))
@@ -241,9 +264,6 @@ namespace Garage3.Web.Controllers
             return View(vehicle);
         }
 
-
-            return RedirectToAction(nameof(Index));
-        }
 
     }
 }

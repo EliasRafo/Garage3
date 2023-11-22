@@ -9,6 +9,19 @@
     @if(Model.CustomerAge>18)
     {
         <a asp-action="AddVehicle" asp-route-id="@Model.Customer.Id">Add vehicle</a>
+
+ @*        <div class="form-group">
+            
+            <label asp-for="VehicleId" class="control-label"></label>
+            <select class="form-control" ID="PosID" asp-for="VehicleId" asp-items="@Model.SelectListVihecles">
+
+                selected="selected" value="">Select vehicle
+            </select>
+            <span asp-validation-for="VehicleId" class="text-danger"></span>
+           
+        </div>  INFO: for sending this data to park controller use of javascript is needed, (update if ther is time left). *@
+
+
         <div class="container mt-5">
             <div class="row">
 
@@ -54,7 +67,7 @@
                             }
                                         else
                                         {
-                                            <a class="btn btn-success" asp-controller="Member" asp-action="Park" asp-route-id="@item.Id">Check In</a>
+                                            <a class="btn btn-success" asp-controller="Member" asp-action="Park" asp-route-id="@Model.Customer.Id">Check In</a>
                                         }
 
                                     </div>

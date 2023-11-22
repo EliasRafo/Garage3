@@ -86,8 +86,15 @@ namespace Garage3.Persistence.Services
 
         public async Task<Customer> GetCustomerByID(int id)
         {
-            Customer x = await _context.Customer.Where(s => s.Id == id).FirstOrDefaultAsync();
+            Customer x = await _context.Customer.Where(s => s.Id == id).Include(s => s.Vehicles).FirstOrDefaultAsync();
             return x;
+        }
+
+        public async Task<ICollection<Vehicle>> GetVehiclesByCustomerID(int id)
+        {
+            //Update with use of viewmodel.
+            ICollection<Vehicle> vehicle = await _context.Vehicle.Where(s => s.Id == id).ToListAsync();
+            return vehicle;
         }
 
         public async Task<Spot> GetSpotByID(int id)
@@ -111,5 +118,12 @@ namespace Garage3.Persistence.Services
         {
             return await _context.Vehicle.AnyAsync(e => e.RegNum == vehicle.RegNum);
         }
+
+        public async Task<Vehicle> GetVehicleByID(int VehicleId)
+        {
+            
+            return await _context.Vehicle.Where(e => e.Id == VehicleId).FirstOrDefaultAsync();
+        }
+
     }
 }

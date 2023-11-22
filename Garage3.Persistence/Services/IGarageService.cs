@@ -18,6 +18,10 @@ namespace Garage3.Persistence.Services
 
         public Task<Customer> IsMember(string ssn);
 
+        public Task<ICollection<Vehicle>> GetVehiclesByCustomerID(int id);
+
+        public Task<Vehicle> GetVehicleByID(int VehicleId);
+
         public Task<List<VehicleType>> GetTypes();
         public Task<bool> AddVehicle(Vehicle vehicle);
 

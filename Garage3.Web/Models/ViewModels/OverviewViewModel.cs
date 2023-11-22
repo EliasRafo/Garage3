@@ -1,4 +1,5 @@
-﻿using Garage3.Core.Models;
+﻿using Garage3.Core.Entities;
+using Garage3.Core.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace Garage3.Web.Models.ViewModels
@@ -13,6 +14,8 @@ namespace Garage3.Web.Models.ViewModels
 
         public int CurrentlyParked { get; set; }
         public List<VehicleTypesDto> VehiclesStatistic { get; set; }
+
+        
 
     }
 }

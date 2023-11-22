@@ -1,15 +1,14 @@
-﻿namespace Garage3.Core.Models
-
-using Garage3.Core.Entities;
+﻿using Garage3.Core.Entities;
+namespace Garage3.Core.Models
 {
+
+   // public Spot? Spot { get; set; }
     public class ParkingSpot
     {
         public int Id { get; set; }
         public bool Reserved { get; set; }
 
-namespace Garage3.Core.Models
-{
-    public record VehicleTypesDto(string Name, int Total);
-        public Spot? Spot { get; set; }
     }
+    public record VehicleTypesDto(string Name, int Total);
+
 }

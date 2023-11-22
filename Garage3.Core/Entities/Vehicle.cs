@@ -15,7 +15,6 @@ namespace Garage3.Core.Entities
         // FK
         public VehicleType VehicleType { get; set; }
 
-
         public string RegNum { get; set; }
 
         public string Color { get; set; }

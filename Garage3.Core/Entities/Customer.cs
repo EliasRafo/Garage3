@@ -27,7 +27,6 @@ namespace Garage3.Core.Entities
         [Required]
         [RegularExpression(@"^(19|20)\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])[-]\d{4}$", 
             ErrorMessage="Social Security Number must be in this format YYYYMMDD-NNNN")]
-		[Key]
 		public string SocialNum { get; set; }
 
         //Navigation property

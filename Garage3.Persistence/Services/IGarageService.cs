@@ -11,6 +11,8 @@ namespace Garage3.Persistence.Services
 {
     public interface IGarageService
     {
+        public Task CreateCustomer(Customer customer);
+
         // Asynchronously gets the capacity of the garage.
         public Task<int> GetCapacity();
 

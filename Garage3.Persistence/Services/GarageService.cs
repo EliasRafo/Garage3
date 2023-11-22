@@ -109,6 +109,13 @@ namespace Garage3.Persistence.Services
                 .Include(s => s.Garage)
                 .ToListAsync();
         }
+
+        public async Task CreateCustomer(Customer customer)
+        {
+            // Add the new customer to the database.
+            _context.Add(customer);
+            await _context.SaveChangesAsync();
+        }
     }
 
 }

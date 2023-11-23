@@ -9,7 +9,7 @@ namespace Garage3.Core.Entities
 {
     public class Vehicle
     {
-        public object Type;
+        //public object Type;
 
         //[Key]
         public int Id { get; set; }

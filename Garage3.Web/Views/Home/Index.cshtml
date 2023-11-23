@@ -4,11 +4,20 @@
 }
 
 <div class="text-center">
+
+    @if (@TempData["AlertMessage"] != null)
+    {
+        string message = TempData["AlertMessage"].ToString();
+        <message message="@message"></message>
+    }
+
     <h1 class="display-4">Welcome to garage</h1>
 
-    <p>You have to be registered in garage to check in/out your vehicle.</p>
+    <p>You have to be a registered member to check in/out your vehicle.</p>
 
-    <h4>Sign in to continue to Garage</h4>  <p>No account? <a asp-action="Index">Create one!</a></p>
+    <h4>Sign in to continue to Garage</h4> 
+
+    <p><a asp-action="CreateCustomer">Create an Account!</a></p>
 
     <form asp-action="Search">
     <div class="input-group inputs">

@@ -12,7 +12,7 @@ namespace Garage3.Core.Entities
         public string Type { get; set; }
         public int Size { get; set; }
 
-        //Navigation property
+        // Navigation property
         public ICollection<Vehicle> Vehicles { get; set; }
     }
 }

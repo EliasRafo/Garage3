@@ -1,0 +1,28 @@
+﻿@* @model IEnumerable<Garage3.Core.Entities.Customer> *@
+@model Garage3.Web.Models.ViewModels.IndexViewModel2
+@inject Garage3.Persistence.Services.IGarageService service
+
+@{
+    ViewData["Title"] = "Customers";
+}
+
+<h1>Customers</h1>
+
+<form asp-action="Filter3" asp-controller="Admin" method="get">
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" asp-for="FilterParams.Title" placeholder="Search on title..." />
+        <div class="input-group-append">
+            <select class="form-control" asp-for="FilterParams.Genre" asp-items="@service.GetGenres()">
+                <option selected="selected" value="">Please select</option>
+            </select>
+        </div>
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-primary"><i class="fa fa-search">&emsp;Search</i></button>
+        </div>
+    </div>
+</form>
+
+
+
+<partial name="CustomerListPartial" model="@Model.Customers" />
+

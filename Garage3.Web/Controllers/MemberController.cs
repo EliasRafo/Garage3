@@ -14,6 +14,7 @@ namespace Garage3.Web.Controllers
     public class MemberController : Controller
     {
         private readonly IGarageService _service;
+
         public MemberController(IGarageService service)
         {
             _service = service;
@@ -51,7 +52,7 @@ namespace Garage3.Web.Controllers
 
             int year;
 
-            var Birthday = customer.SocialNum.Split(' ')[0];
+            var Birthday = customer.SocialNum.Split('-')[0];
 
             if (Birthday.Length == 8)
             {
@@ -62,7 +63,6 @@ namespace Garage3.Web.Controllers
                 year = Int32.Parse(Birthday.Substring(0, 2));
             }
 
-            // Calculate the age.
             customerViewModel.CustomerAge = today.Year - year;
 
             customerViewModel.Customer = customer;
@@ -82,8 +82,8 @@ namespace Garage3.Web.Controllers
             for (int i = 1; i <= Capacity; i++)
             {
                 var v = s.Where(e => e.Address == i).FirstOrDefault();
-                ParkingSpot parkingSpot = new ParkingSpot();
 
+                ParkingSpot parkingSpot = new ParkingSpot();
                 if (v is null)
                 {
                     parkingSpot.Id = i;
@@ -96,6 +96,7 @@ namespace Garage3.Web.Controllers
                     parkingSpot.Reserved = true;
                     parkingSpot.Spot = v;
                 }
+
                 parkingSpots.Add(parkingSpot);
             }
 
@@ -136,6 +137,14 @@ namespace Garage3.Web.Controllers
                     CustomerId = id
                 };
 
+                    if (await _service.AddVehicle(vehicle))
+                    {
+                        Customer customer = await _service.GetCustomerByID(id);
+                        CustomerViewModel customerViewModel = await CreateCustomerViewModel(customer);
+                        Feedback feedback = new Feedback() { status = "ok", message = "The vehicle has been added successfully." };
+                        TempData["AlertMessage"] = JsonConvert.SerializeObject(feedback);
+                        return View("Index", customerViewModel);
+                    }
                 if (await _service.AddVehicle(vehicle))
                 {
                     Customer customer = await _service.GetCustomerByID(id);
@@ -145,9 +154,9 @@ namespace Garage3.Web.Controllers
 
                 else
                 {
-                    Customer customer = await _service.GetCustomerByID(id);
-                    CustomerViewModel customerViewModel = await CreateCustomerViewModel(customer);
-                    return View("Index", customerViewModel);
+                    Feedback feedback = new Feedback() { status = "error", message = "Vehicle already exist." };
+                    TempData["AlertMessage"] = JsonConvert.SerializeObject(feedback);
+                    await AddVehicle(id);
                 }
 
 
@@ -208,6 +217,9 @@ namespace Garage3.Web.Controllers
                     ParkingPeriod = $"{duration.Days} Days, {duration.Hours} Hours, {duration.Minutes} Minutes",
                     Price = $"{pr} SEK"
                 };
+
+                Feedback feedback = new Feedback() { status = "ok", message = "The vehicle has been checked out successfully." };
+                TempData["AlertMessage"] = JsonConvert.SerializeObject(feedback);
 
                 return View("Receipt", model);
             }

@@ -14,19 +14,18 @@ namespace Garage3.Core.Entities
         public DateTime CheckIn { get; set; }
         public DateTime CheckOut { get; set; }
 
-        
         public int Address { get; set; }
 
         // Foreign Key
         public int GarageId { get; set; }
 
-        //Navigation property
+        // Navigation property
         public Garage Garage { get; set; }
 
         // Foreign Key
         public int? VehicleId { get; set; }
 
-        //Navigation property
+        // Navigation property
         public Vehicle Vehicle { get; set; }
     }
 }

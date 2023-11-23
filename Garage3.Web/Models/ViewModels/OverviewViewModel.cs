@@ -13,6 +13,7 @@ namespace Garage3.Web.Models.ViewModels
         public int VehiclesNumber { get; set; }
 
         public int CurrentlyParked { get; set; }
+
         public List<VehicleTypesDto> VehiclesStatistic { get; set; }
 
         

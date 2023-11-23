@@ -1,6 +1,7 @@
 ﻿using Garage3.Core.Entities;
 using Garage3.Core.Models;
 using Garage3.Persistence.Data;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using System;
@@ -73,6 +74,21 @@ namespace Garage3.Persistence.Services
             }
         }
 
+        public async Task<bool> AddVehicleType(VehicleType vehicleType)
+        {
+            var v = _context.VehicleType.Where(e => e.Type.StartsWith(vehicleType.Type)).FirstOrDefault();
+            if (v is null)
+            {
+                _context.Add(vehicleType);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public async Task<bool> ParkVehicle(ParkVihecle parkVihecle)
         {
             var v = _context.Spot.FirstOrDefault(e => e.Address == parkVihecle.Address);
@@ -96,8 +112,8 @@ namespace Garage3.Persistence.Services
         }
 
 
-        public async Task<IEnumerable<Spot>> GetSpot() 
-        { 
+        public async Task<IEnumerable<Spot>> GetSpot()
+        {
             // Change to use of viewmodel+Select, discuss what data we need.
             return await _context.Spot.Where(s => s.Active == true)
                 .Include(s => s.Vehicle)
@@ -134,12 +150,67 @@ namespace Garage3.Persistence.Services
                 .Include(s => s.Garage).FirstOrDefaultAsync();
         }
 
+        public async Task<VehicleType> GetVehicleTypeByType(string type)
+        {
+            return await _context.VehicleType.Where(t => t.Type == type)
+                .FirstOrDefaultAsync();
+        }
+
+        //    public async Task<IEnumerable<Spot>> GetSpot() 
+        //    { // add customer information
+        //        return await _context.Spot.Where(s => s.Active == true)
+        //    .Include(s => s.Vehicle)
+        //    .ThenInclude(v => v.VehicleType)
+        //    .Include(s => s.Garage)
+        //    .ToListAsync();
+        //    }
         public async void UpdateSpot(Spot spot)
         {
             var s = _context.Spot.First(a => a.Id == spot.Id);
             s.Active = false;
             s.CheckOut = spot.CheckOut;
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<Customer>> GetCustomers()
+        {
+            return await _context.Customer
+                        .Include(s => s.Vehicles).ToListAsync();
+        }
+
+        public async Task<IEnumerable<Vehicle>> GetVehiclesByCustomerId(int id)
+        {
+            return await _context.Vehicle.Where(v => v.CustomerId == id)
+                .Include(v => v.VehicleType).ToListAsync();
+        }
+
+        public async Task<bool> CreateCustomer(Customer customer)
+        {
+            var existingCustomer = await _context.Customer
+                 .Where(c => c.SocialNum == customer.SocialNum)
+                 .FirstOrDefaultAsync();
+
+            if (existingCustomer is null)
+            {
+                _context.Add(customer);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public IEnumerable<SelectListItem> GetGenres()
+        {
+            List < SelectListItem > x = new List<SelectListItem>();
+            SelectListItem s1 = new SelectListItem() { Text = "First Name", Value = "1" };
+            SelectListItem s2 = new SelectListItem() { Text = "Last Name", Value = "2" };
+
+            x.Add(s1);
+            x.Add(s2);
+            return x;
         }
 
         public async Task<bool> VehicleExists(Vehicle vehicle)

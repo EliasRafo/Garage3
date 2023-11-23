@@ -1,5 +1,6 @@
 ﻿using Garage3.Core.Entities;
 using Garage3.Core.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,8 @@ namespace Garage3.Persistence.Services
         public Task<bool> VehicleIsParked(int VehicleId);
 
         public Task<List<VehicleType>> GetTypes();
+        public Task<VehicleType> GetVehicleTypeByType(string type);
+        public Task<bool> AddVehicleType(VehicleType vehicleType);
         public Task<bool> AddVehicle(Vehicle vehicle);
 
         public Task<bool> ParkVehicle(ParkVihecle parkVihecle);
@@ -38,6 +41,14 @@ namespace Garage3.Persistence.Services
         public Task<Spot> GetSpotByID(int id);
 
         public void UpdateSpot(Spot spot);
+
+        public Task<IEnumerable<Customer>> GetCustomers();
+
+        public Task<IEnumerable<Vehicle>> GetVehiclesByCustomerId(int id);
+
+        Task<bool> CreateCustomer(Customer customer);
+
+        public IEnumerable<SelectListItem> GetGenres();
 
         public Task<bool> VehicleExists(Vehicle vehicle);
 

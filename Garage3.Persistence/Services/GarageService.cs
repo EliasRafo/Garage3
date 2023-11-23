@@ -250,15 +250,15 @@ namespace Garage3.Persistence.Services
 
 
             return await _context.Vehicle
-                   .Where(s => s.CustomerId== id &&
-                               s.Brand == searchInput ||
+                   .Where(s => s.CustomerId== id && 
+                               (s.Brand == searchInput ||
                                s.Color == searchInput ||
                                s.Model == searchInput ||
                                s.RegNum == searchInput ||
                                s.WheelsNumber == searchInt ||
                                s.Id == searchInt ||
                                //Fix//Translate to type.
-                               s.VehicleType.Type == searchInput).Include(s=>s.Customer).Include(s=>s.VehicleType).ToListAsync();
+                               s.VehicleType.Type == searchInput)).Include(s=>s.Customer).Include(s=>s.VehicleType).ToListAsync();
         }
 
     }

@@ -13,6 +13,8 @@ namespace Garage3.Web.Models.ViewModels
 
         public List<ParkingSpot> ParkingSpots { get; set; }
 
+        public List<VehicleTypesDto> VehiclesStatistic { get; set; }
+
         public IEnumerable <SelectListItem> SelectListVihecles { get; set; }
 
         public Vehicle vehicle { get; set; }

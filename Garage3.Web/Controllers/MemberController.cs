@@ -336,23 +336,24 @@ namespace Garage3.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Search(string vehicleProp, int id)
         {
-
+            Search searchVehicle = new Search();
+            searchVehicle.id = id;
             if (vehicleProp == null)
             {
                 vehicleProp = string.Empty;
                 //Feedback feedback = new Feedback() { status = "ok", message = $"No Match found for \"{vehicleProp}\"." };
                 //TempData["AlertMessage"] = JsonConvert.SerializeObject(feedback);
-                return View();
+                return View(searchVehicle);
             }
-            Search searchVehicle = new Search();
+
             searchVehicle.Vehicles = await _service.SearchMatchAsync(vehicleProp, id);
-            searchVehicle.id = id;
+            
             if (searchVehicle.Vehicles.Count == 0)
             {
 
                 //Feedback feedback = new Feedback() { status = "ok", message = $"No Match found for \"{vehicleProp}\"." };
                 //TempData["AlertMessage"] = JsonConvert.SerializeObject(feedback);
-                return View();
+                return View(searchVehicle);
             }
 
             return View(searchVehicle);

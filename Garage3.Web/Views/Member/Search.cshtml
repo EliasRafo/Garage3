@@ -44,6 +44,8 @@
         </tr>
     </thead>
     <tbody>
+        @if(Model.Vehicles.Count > 0)
+        {
 @foreach (var item in Model.Vehicles) {
         <tr>
             <td>
@@ -81,6 +83,7 @@
             </td>
         </tr>
 }
+        }
 
     </tbody>
 </table>

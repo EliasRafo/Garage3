@@ -12,6 +12,7 @@ namespace Garage3.Core.Models
         public int Id { get; set; }
         public bool Reserved { get; set; }
 
+        // Navigation property
         public Spot? Spot { get; set; }
     }
 }

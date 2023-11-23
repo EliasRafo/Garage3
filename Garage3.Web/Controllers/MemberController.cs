@@ -14,6 +14,7 @@ namespace Garage3.Web.Controllers
     public class MemberController : Controller
     {
         private readonly IGarageService _service;
+
         public MemberController(IGarageService service)
         {
             _service = service;
@@ -53,7 +54,6 @@ namespace Garage3.Web.Controllers
                 year = Int32.Parse(Birthday.Substring(0, 2));
             }
 
-            // Calculate the age.
             customerViewModel.CustomerAge = today.Year - year;
 
             customerViewModel.Customer = customer;
@@ -73,8 +73,8 @@ namespace Garage3.Web.Controllers
             for (int i = 1; i <= Capacity; i++)
             {
                 var v = s.Where(e => e.Address == i).FirstOrDefault();
-                ParkingSpot parkingSpot = new ParkingSpot();
 
+                ParkingSpot parkingSpot = new ParkingSpot();
                 if (v is null)
                 {
                     parkingSpot.Id = i;
@@ -87,6 +87,7 @@ namespace Garage3.Web.Controllers
                     parkingSpot.Reserved = true;
                     parkingSpot.Spot = v;
                 }
+
                 parkingSpots.Add(parkingSpot);
             }
 

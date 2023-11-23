@@ -4,12 +4,15 @@ using System.ComponentModel.DataAnnotations;
 namespace Garage3.Web.Models.ViewModels
 {
     public class OverviewViewModel
-    
     {
-        public string? Owner { get; set; }
-        public string? MembershipType { get; set; }
-        public string? VehicleType { get; set; }
-        public string? RegNum { get; set; }
-        public TimeSpan ParkDuration { get; set; }
+        public int Capacity { get; set; }
+
+        public int CustomerNumber { get; set; }
+
+        public int VehiclesNumber { get; set; }
+
+        public int CurrentlyParked { get; set; }
+
+        public List<VehicleTypesDto> VehiclesStatistic { get; set; }
     }
 }

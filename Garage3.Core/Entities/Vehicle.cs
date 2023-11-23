@@ -45,13 +45,14 @@ namespace Garage3.Core.Entities
         public int  WheelsNumber { get; set; }
 
         // Foreign Key
-       public int CustomerId { get; set; }
+        public int CustomerId { get; set; }
 
-        //Navigation property
+        // Navigation property
         public Customer Customer { get; set; }
 
-        //Navigation property
+        // Navigation property
         public ICollection<Spot> Spots { get; set; }
         public string RegistrationNumber { get; set; }
     }
+
 }

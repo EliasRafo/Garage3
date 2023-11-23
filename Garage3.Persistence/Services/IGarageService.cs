@@ -34,5 +34,7 @@ namespace Garage3.Persistence.Services
         public Task<IEnumerable<Customer>> GetCustomers();
 
         public Task<IEnumerable<Vehicle>> GetVehiclesByCustomerId(int id);
+        Task<IEnumerable<object>> AddVehicle();
+        Task<IEnumerable<object>> GetVehiclesByCustomerId(object value);
     }
 }

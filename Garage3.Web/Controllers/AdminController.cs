@@ -74,6 +74,5 @@ namespace Garage3.Persistence.Services
 
             return View(viewModel);
         }
-
     }
-}         
+}

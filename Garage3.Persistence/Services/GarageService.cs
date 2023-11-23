@@ -233,6 +233,27 @@ namespace Garage3.Persistence.Services
             return await _context.Spot.AnyAsync(e => e.Id == SpotId);
         }
 
+        ////Handle search for the "skipped spots" and Reduce database calls.
+        //public async Task<bool> SpotFree(int SpotId, int Vehiclesize)
+        //{
+        //    //Loop for vehicles Size
+        //    for (int i = 0; i < Vehiclesize - 1; i++)
+        //    {
+        //        //Get data for spot-should be replaced with query for all spots
+        //        Spot spot = await _context.Spot.FirstAsync(e => e.Id == (SpotId + i));
+        //        if (spot.Active == true)
+        //        {
+        //            i = 0;
+        //            SpotId = spot.Id+1;
+        //            if (SpotId == 20)
+        //            { return false;}
+        //        }
+        //        if (i == Vehiclesize - 1)
+        //        { return true;}
+        //    }
+            
+        //}
+
         public async Task<bool> VehicleIsParked(int VehicleId)
         {
 

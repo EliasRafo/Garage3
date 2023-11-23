@@ -1,5 +1,6 @@
 ﻿using Garage3.Core.Entities;
 using Garage3.Core.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,8 @@ namespace Garage3.Persistence.Services
         public Task<Customer> IsMember(string ssn);
 
         public Task<List<VehicleType>> GetTypes();
+        public Task<VehicleType> GetVehicleTypeByType(string type);
+        public Task<bool> AddVehicleType(VehicleType vehicleType);
         public Task<bool> AddVehicle(Vehicle vehicle);
 
         public Task<IEnumerable<Spot>> GetSpot();
@@ -36,5 +39,7 @@ namespace Garage3.Persistence.Services
         public Task<IEnumerable<Vehicle>> GetVehiclesByCustomerId(int id);
 
         Task<bool> CreateCustomer(Customer customer);
+
+        public IEnumerable<SelectListItem> GetGenres();
     }
 }

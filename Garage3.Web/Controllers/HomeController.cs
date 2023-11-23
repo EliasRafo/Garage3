@@ -1,9 +1,11 @@
 ﻿using Garage3.Core.Entities;
+using Garage3.Core.Models;
 using Garage3.Persistence.Services;
 using Garage3.Web.Models;
 using Garage3.Web.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 
@@ -75,6 +77,22 @@ namespace Garage3.Web.Controllers
                 {
                     return RedirectToAction("Index", "Member", member);
                 }
+                else
+                {
+
+                    Feedback feedback = new Feedback() { status = "error", message = "You are not registered in garage." };
+                    TempData["AlertMessage"] = JsonConvert.SerializeObject(feedback);
+                    await Index();
+
+                }
+            }
+            else
+            {
+                
+                    Feedback feedback = new Feedback() { status = "error", message = "Social Security Number must be in this format YYYYMMDD-NNNN." };
+                    TempData["AlertMessage"] = JsonConvert.SerializeObject(feedback);
+                await Index();
+
             }
             return View("Index");
         }

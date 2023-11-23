@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Garage3.Core.Entities.Customer>
+﻿@* @model IEnumerable<Garage3.Core.Entities.Customer> *@
+@model Garage3.Web.Models.ViewModels.IndexViewModel2
+@inject Garage3.Persistence.Services.IGarageService service
 
 @{
     ViewData["Title"] = "Customers";
@@ -6,38 +8,21 @@
 
 <h1>Customers</h1>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SocialNum)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LastName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SocialNum)
-                </td>
-                <td>
-                    <a asp-action="Details" asp-route-id="@item.Id">Vehicles</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<form asp-action="Filter3" asp-controller="Admin" method="get">
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" asp-for="FilterParams.Title" placeholder="Search on title..." />
+        <div class="input-group-append">
+            <select class="form-control" asp-for="FilterParams.Genre" asp-items="@service.GetGenres()">
+                <option selected="selected" value="">Please select</option>
+            </select>
+        </div>
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-primary"><i class="fa fa-search">&emsp;Search</i></button>
+        </div>
+    </div>
+</form>
+
+
+
+<partial name="CustomerListPartial" model="@Model.Customers" />
+

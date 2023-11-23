@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.Metrics;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -34,7 +35,7 @@ namespace Garage3.Web.Controllers
             return View(customerViewModel);
             
         }
-
+        
         private async Task<CustomerViewModel> CreateCustomerViewModel(Customer customer)
         {
             CustomerViewModel customerViewModel = new CustomerViewModel();

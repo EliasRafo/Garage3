@@ -97,7 +97,7 @@ namespace Garage3.Persistence.Services
         public async Task<IActionResult> Filter3(IndexViewModel2 viewModel)
         {
             var customers = await _garageService.GetCustomers();
-            
+
             
             if (viewModel.FilterParams.Genre is null || viewModel.FilterParams.Title is null)
             {

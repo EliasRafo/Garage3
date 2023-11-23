@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Runtime.Intrinsics.X86;
 using System.Text;
 using System.Threading.Tasks;
@@ -90,6 +91,28 @@ namespace Garage3.Persistence.Services
             }
         }
 
+        public async Task<bool> ParkVehicle(ParkVihecle parkVihecle)
+        {
+            var v = _context.Spot.FirstOrDefault(e => e.Address == parkVihecle.Address);
+
+            if (v is null) return false;
+            if (v.Active == false)
+            {
+                v.Active = parkVihecle.Active;
+                v.CheckIn = parkVihecle.CheckIn;
+                v.CheckOut = parkVihecle.CheckOut;
+                v.Address = parkVihecle.Address;
+                v.VehicleId = parkVihecle.VehicleId;
+                _context.Update(v);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
 
         public async Task<IEnumerable<Spot>> GetSpot()
         {
@@ -102,10 +125,22 @@ namespace Garage3.Persistence.Services
                 .ToListAsync();
         }
 
-        public async Task<Customer> GetCustomerByID(int id)
+        public async Task<IEnumerable<Spot>> GetAllSpots()
         {
-            Customer x = await _context.Customer.Where(s => s.Id == id).FirstOrDefaultAsync();
-            return x;
+            // Change to use of viewmodel+Select, discuss what data we need.
+            return await _context.Spot.ToListAsync();
+        }
+
+        public async Task<Customer?> GetCustomerByID(int id)
+        {
+            return await _context.Customer.Include(s => s.Vehicles).FirstOrDefaultAsync(s => s.Id == id);
+        }
+
+        public async Task<ICollection<Vehicle>> GetVehiclesByCustomerID(int id)
+        {
+            //Update with use of viewmodel.
+            ICollection<Vehicle> vehicle = await _context.Vehicle.Where(s => s.Id == id).ToListAsync();
+            return vehicle;
         }
 
         public async Task<Spot> GetSpotByID(int id)
@@ -189,5 +224,77 @@ namespace Garage3.Persistence.Services
             x.Add(s2);
             return x;
         }
+
+        public async Task<bool> VehicleExists(Vehicle vehicle)
+        {
+            return await _context.Vehicle.AnyAsync(e => e.RegNum == vehicle.RegNum);
+        }
+
+        public async Task<Vehicle> GetVehicleByID(int VehicleId)
+        {  
+            return await _context.Vehicle.Where(e => e.Id == VehicleId).Include(e=>e.Customer).FirstOrDefaultAsync();
+        }
+
+        public async Task<bool> VehicleExists(int VehicleId)
+        {
+            return await _context.Vehicle.AnyAsync(e => e.Id == VehicleId);
+        }
+
+        public async Task<bool> SpotFree(int SpotId)
+        {
+            return await _context.Spot.AnyAsync(e => e.Id == SpotId);
+        }
+
+        //Handle search for the "skipped spots" and Reduce database calls.
+        //public async Task<bool> SpotFree(int SpotId, int Vehiclesize)
+        //{
+        //    //Loop for vehicles Size
+        //    for (int i = 0; i < Vehiclesize - 1; i++)
+        //    {
+        //        //Get data for spot-should be replaced with query for all spots
+        //        Spot spot = await _context.Spot.FirstAsync(e => e.Id == (SpotId + i));
+        //        if (spot.Active == true)
+        //        {
+        //            i = 0;
+        //            SpotId = spot.Id + 1;
+        //            if (SpotId == 20)
+        //            { return false; }
+        //        }
+        //        if (i == Vehiclesize - 1)
+        //        { return true; }
+        //    }
+             
+        //    return false;
+
+        //}
+
+        public async Task<bool> VehicleIsParked(int VehicleId)
+        {
+
+            return await _context.Spot.AnyAsync(e => e.VehicleId == VehicleId);
+        }
+
+
+        public async Task<List<Vehicle>> SearchMatchAsync(string searchInput, int id)
+        {
+
+            ArgumentNullException.ThrowIfNull(searchInput, nameof(searchInput));
+
+
+            int.TryParse(searchInput, out int searchInt);
+
+
+            return await _context.Vehicle
+                   .Where(s => s.CustomerId== id && 
+                               (s.Brand == searchInput ||
+                               s.Color == searchInput ||
+                               s.Model == searchInput ||
+                               s.RegNum == searchInput ||
+                               s.WheelsNumber == searchInt ||
+                               s.Id == searchInt ||
+                               //Fix//Translate to type.
+                               s.VehicleType.Type == searchInput)).Include(s=>s.Customer).Include(s=>s.VehicleType).ToListAsync();
+        }
+
     }
 }

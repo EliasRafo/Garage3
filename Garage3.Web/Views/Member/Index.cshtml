@@ -17,6 +17,30 @@
     <br />
     @if(Model.CustomerAge>18)
     {
+        <a asp-action="AddVehicle" asp-route-id="@Model.Customer.Id">Add vehicle</a>
+
+ @*        <div class="form-group">
+            
+            <label asp-for="VehicleId" class="control-label"></label>
+            <select class="form-control" ID="PosID" asp-for="VehicleId" asp-items="@Model.SelectListVihecles">
+
+                selected="selected" value="">Select vehicle
+            </select>
+            <span asp-validation-for="VehicleId" class="text-danger"></span>
+           
+        </div>  INFO: for sending this data to park controller use of javascript is needed, (update if ther is time left). *@
+
+        <form asp-action="Search" asp-route-id="@Model.Customer.Id" method="get">
+            <div class="form-group">
+                <P> Search your vehicles </P>
+                <input type="text" name="vehicleProp" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Search" class="btn btn-primary" />
+            </div>
+        </form>
+
+
         <a class="btn btn-outline-primary" asp-action="AddVehicle" asp-route-id="@Model.Customer.Id">Add vehicle</a>
         <div class="container mt-5">
             <div class="row">
@@ -69,9 +93,8 @@
                                         }
                                         else
                                         {
-                                            
-                                            <a class="btn btn-success" asp-controller="Vehicles" asp-action="Park" asp-route-id="@item.Id">Check In</a>
-                                            
+                                            <a class="btn btn-success" asp-controller="Member" asp-action="Park" asp-route-Spotid="@item.Id" asp-route-id="@Model.Customer.Id">Check In</a>
+                           
                                         }
 
                                     </div>

@@ -96,7 +96,7 @@ namespace Garage3.Web.Controllers
             return parkingSpots;
         }
 
-        
+
         public async Task<IActionResult> AddVehicle(int id)
         {
             ViewBag.customerId = id.ToString();
@@ -111,24 +111,24 @@ namespace Garage3.Web.Controllers
             if (ModelState.IsValid)
             {
                 int selectedId = Convert.ToInt32(form["VehicleType"]);
-                 var type = await _service.GetTypes();
+                var type = await _service.GetTypes();
 
                 int id = Convert.ToInt32(form["CustomerId"]);
                 string reg = form["RegNum"];
 
-                
-                    Vehicle vehicle = new Vehicle()
-                    {
 
-                        VehicleType = type.Where(t => t.Id == selectedId).FirstOrDefault(),
-                        RegNum = form["RegNum"],
-                        Color = form["Color"],
-                        Brand = form["Brand"],
-                        Model = form["Model"],
-                        WheelsNumber = Convert.ToInt32(form["WheelsNumber"]),
+                Vehicle vehicle = new Vehicle()
+                {
 
-                        CustomerId = id
-                    };
+                    VehicleType = type.Where(t => t.Id == selectedId).FirstOrDefault(),
+                    RegNum = form["RegNum"],
+                    Color = form["Color"],
+                    Brand = form["Brand"],
+                    Model = form["Model"],
+                    WheelsNumber = Convert.ToInt32(form["WheelsNumber"]),
+
+                    CustomerId = id
+                };
 
                     if (await _service.AddVehicle(vehicle))
                     {
@@ -138,8 +138,14 @@ namespace Garage3.Web.Controllers
                         TempData["AlertMessage"] = JsonConvert.SerializeObject(feedback);
                         return View("Index", customerViewModel);
                     }
+                if (await _service.AddVehicle(vehicle))
+                {
+                    Customer customer = await _service.GetCustomerByID(id);
+                    CustomerViewModel customerViewModel = await CreateCustomerViewModel(customer);
+                    return View("Index", customerViewModel);
+                }
 
-                    else
+                else
                 {
                     Feedback feedback = new Feedback() { status = "error", message = "Vehicle already exist." };
                     TempData["AlertMessage"] = JsonConvert.SerializeObject(feedback);
@@ -155,14 +161,14 @@ namespace Garage3.Web.Controllers
         {
             if (id == null)
             {
-                
+
                 return View("Index");
             }
 
             var spot = await _service.GetSpotByID(id);
             if (spot == null)
             {
-                
+
                 return View("Index");
             }
 
@@ -177,7 +183,7 @@ namespace Garage3.Web.Controllers
             var spot = await _service.GetSpotByID(id);
             if (spot != null)
             {
-                
+
                 DateTime CheckOut = DateTime.Now;
 
                 Spot s = new Spot()
@@ -193,7 +199,7 @@ namespace Garage3.Web.Controllers
 
                 _service.UpdateSpot(s);
 
-    TimeSpan duration = CheckOut - spot.CheckIn;
+                TimeSpan duration = CheckOut - spot.CheckIn;
 
                 var pr = Math.Floor(duration.TotalMinutes * 1) + 20;
 
@@ -211,8 +217,145 @@ namespace Garage3.Web.Controllers
                 return View("Receipt", model);
             }
 
+
+
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Park(int id, int Spotid)
+        {
+            //---Needs to be changed//Add query to customerquery.
+            Customer customerinfo = await _service.GetCustomerByID(id);
+            CustomerViewModel customerViewModel = await CreateCustomerViewModel(customerinfo);
+
+            customerViewModel.SelectListVihecles = customerinfo.Vehicles.Select(v =>
+                    new SelectListItem
+                    {
+                        Value = v.Id.ToString(),
+                        Text = $"{v.RegNum} , {v.Brand} , {v.Model}"
+                    });            //---Needs to be changed//Add query to customerquery.
+            customerViewModel.Spotid = Spotid;
+            return View(customerViewModel);
+        }
+
+        [HttpPost, ActionName("Park")]
+
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ParkPost(int vehicleId, int customerId, int spotId)//, int Spotid)
+        {
+            CustomerViewModel customerViewModel = new CustomerViewModel();
+            var vehicle = await _service.GetVehicleByID(vehicleId);
+            // Add if spot if still free.
+            if (!await _service.SpotFree(spotId)){
+                //Feedback feedback = new Feedback() { status = "ok", message = $"Vehicle with registration number {vehicle.RegNum} already exist in the garage."};
+                //TempData["AlertMessage"] = JsonConvert.SerializeObject(feedback);
+                Customer customerinfo = await _service.GetCustomerByID(customerId);
+                customerViewModel = await CreateCustomerViewModel(customerinfo);
+                customerViewModel.SelectListVihecles = customerinfo.Vehicles.Select(v =>
+                new SelectListItem
+                {
+                    Value = v.Id.ToString(),
+                    Text = $"{v.RegNum} , {v.Brand} , {v.Model}"
+                });
+
+                return View(customerViewModel);
+            };
+            // check if vehicle exist.
+            if (!await _service.VehicleExists(vehicleId)) throw new ArgumentException("Something went terrible wrong, Vihecle does not exist, we will find you to take care of the matter.");
+            if (!await _service.VehicleIsParked(vehicleId))
+            {
+                //await _service.AddVehicle(vehicle);
+
+                ParkVihecle parkVihecle = new ParkVihecle()
+                {
+                    Active = true,
+                    CheckIn = DateTime.Now,
+                    CheckOut = DateTime.Now,
+                    Address = spotId,
+                    VehicleId = vehicleId,
+                    
+                };
+
+                if (await _service.ParkVehicle(parkVihecle))
+                {
+
+                    //Feedback feedback = new Feedback() { status = "ok", message = $"Vihecle with registration number {vehicle.RegNum} is now parked at spot {id}." };
+                    //TempData["AlertMessage"] = JsonConvert.SerializeObject(feedback);
+                    Customer customer = await _service.GetCustomerByID((int)customerId);
+                    customerViewModel = await CreateCustomerViewModel(customer);
+
+                    return View(nameof(Index), customerViewModel);
+
+                }
+                else
+                {
+                    //Feedback feedback = new Feedback() { status = "ok", message = $"Vehicle with registration number {vehicle.RegNum} already exist in the garage."};
+                    //TempData["AlertMessage"] = JsonConvert.SerializeObject(feedback);
+                    Customer customerinfo = await _service.GetCustomerByID(customerId);
+                    customerViewModel = await CreateCustomerViewModel(customerinfo);
+                    customerViewModel.SelectListVihecles = customerinfo.Vehicles.Select(v =>
+                    new SelectListItem
+                    {
+                        Value = v.Id.ToString(),
+                        Text = $"{v.RegNum} , {v.Brand} , {v.Model}"
+                    });
+
+                    return View(customerViewModel);
+                }
+            }
+            else
+            {
+                //Feedback feedback = new Feedback() { status = "ok", message = $"Vehicle with registration number {vehicle.RegNum} already exist in the garage."};
+                //TempData["AlertMessage"] = JsonConvert.SerializeObject(feedback);
+                Customer customerinfo = await _service.GetCustomerByID(customerId);
+                customerViewModel = await CreateCustomerViewModel(customerinfo);
+                customerViewModel.SelectListVihecles = customerinfo.Vehicles.Select(v =>
+                new SelectListItem
+                {
+                    Value = v.Id.ToString(),
+                    Text = $"{v.RegNum} , {v.Brand} , {v.Model}"
+                });            //---Needs to be changed//Add query to customerquery.
+
+                return View(customerViewModel);
+
+            }
+
+
+
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Search(string vehicleProp, int id)
+        {
+            Search searchVehicle = new Search();
+            searchVehicle.id = id;
+            if (vehicleProp == null)
+            {
+                vehicleProp = string.Empty;
+                //Feedback feedback = new Feedback() { status = "ok", message = $"No Match found for \"{vehicleProp}\"." };
+                //TempData["AlertMessage"] = JsonConvert.SerializeObject(feedback);
+                return View(searchVehicle);
+            }
+
+            searchVehicle.Vehicles = await _service.SearchMatchAsync(vehicleProp, id);
+            
+            if (searchVehicle.Vehicles.Count == 0)
+            {
+
+                //Feedback feedback = new Feedback() { status = "ok", message = $"No Match found for \"{vehicleProp}\"." };
+                //TempData["AlertMessage"] = JsonConvert.SerializeObject(feedback);
+                return View(searchVehicle);
+            }
+
+            return View(searchVehicle);
+        }
+
+
+       
+
     }
+
 }
+

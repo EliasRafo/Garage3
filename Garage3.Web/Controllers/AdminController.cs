@@ -14,7 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System.Collections;
 
-namespace Garage3.Persistence.Services
+namespace Garage3.Web.Controllers
 {
     public class AdminController : Controller
     {
@@ -32,8 +32,7 @@ namespace Garage3.Persistence.Services
 
         public async Task<IActionResult> Customer()
         {
-            var customers = await _garageService.GetCustomers();
-            return View(customers);
+            return View(await _garageService.GetCustomers());
         }
 
         public async Task<IActionResult> Details(int? id)

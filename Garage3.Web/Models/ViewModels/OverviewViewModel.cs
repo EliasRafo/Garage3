@@ -1,4 +1,5 @@
-﻿using Garage3.Core.Models;
+﻿using Garage3.Core.Entities;
+using Garage3.Core.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace Garage3.Web.Models.ViewModels

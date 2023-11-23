@@ -46,8 +46,10 @@ namespace Garage3.Persistence.Services
             return await _context.Vehicle.CountAsync();
         }
 
+        // Method to asynchronously check if a customer with a given Social Security Number (ssn) is a member.
         public async Task<Customer> IsMember(string ssn)
         {
+            // Retrieves a customer based on the provided Social Security Number.
             var customer = await _context.Customer.Where(c => c.SocialNum == ssn).FirstOrDefaultAsync();
             return customer;
         }
@@ -126,20 +128,30 @@ namespace Garage3.Persistence.Services
                 .Include(v => v.VehicleType).ToListAsync();
         }
 
+        // Method to asynchronously create a new customer in the database.
         public async Task<bool> CreateCustomer(Customer customer)
         {
+            // Check if a customer with the same Social Security Number already exists.
             var existingCustomer = await _context.Customer
-                 .Where(c => c.SocialNum == customer.SocialNum)
-                 .FirstOrDefaultAsync();
+                .Where(c => c.SocialNum == customer.SocialNum)
+                .FirstOrDefaultAsync();
 
+            // If no existing customer is found, proceed with creating the new customer.
             if (existingCustomer is null)
             {
+                // Add the new customer to the database.
                 _context.Add(customer);
+
+                // Save changes to the database.
                 await _context.SaveChangesAsync();
+
+                // Return true to indicate successful creation.
                 return true;
             }
             else
             {
+                // If a customer with the same Social Security Number exists, return false
+                // to indicate that the creation was not successful.
                 return false;
             }
         }

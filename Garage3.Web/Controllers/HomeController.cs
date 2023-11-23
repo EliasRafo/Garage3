@@ -37,29 +37,36 @@ namespace Garage3.Web.Controllers
             return View(nameof(Index), overviewViewModel);
         }
 
+        // Action method for rendering the Create Customer form.
         public IActionResult CreateCustomer()
         {
             return View();
         }
 
+        // Action method for handling the form submission for creating a customer.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateCustomer(CreateCustomerViewModel model)
         {
+            // Check if the form data is valid.
             if (ModelState.IsValid)
             {
+                // Create a new Customer object with data from the form.
                 var customer = new Customer
                 {
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     SocialNum = model.SocialNum
-
                 };
+
+                // Call the garage service to create the customer in the database.
                 await _garageService.CreateCustomer(customer);
 
+                // Redirect to the Index action of the Member controller with the new customer data.
                 return RedirectToAction("Index", "Member", customer);
             }
 
+            // If validation fails, return back to the CreateCustomer view.
             return View(model);
         }
 

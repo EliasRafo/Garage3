@@ -27,12 +27,13 @@ namespace Garage3.Web.Controllers
 
             return View(nameof(Index), customerViewModel);
         }
+        // Action method for rendering the Member overview page.
         public async Task<IActionResult> Index(Customer customer)
         {
+            // Create a ViewModel for displaying customer information and parking spots.
             CustomerViewModel customerViewModel = await CreateCustomerViewModel(customer);
-            
+
             return View(customerViewModel);
-            
         }
 
         private async Task<CustomerViewModel> CreateCustomerViewModel(Customer customer)

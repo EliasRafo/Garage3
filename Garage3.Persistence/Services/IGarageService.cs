@@ -35,6 +35,7 @@ namespace Garage3.Persistence.Services
 
         public Task<IEnumerable<Vehicle>> GetVehiclesByCustomerId(int id);
 
+        // Method to asynchronously create a customer, checking for duplicates based on first and last name.
         Task<bool> CreateCustomer(Customer customer);
     }
 }

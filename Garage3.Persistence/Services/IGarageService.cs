@@ -19,10 +19,18 @@ namespace Garage3.Persistence.Services
 
         public Task<Customer> IsMember(string ssn);
 
+        public Task<ICollection<Vehicle>> GetVehiclesByCustomerID(int id);
+
+        public Task<Vehicle?> GetVehicleByID(int VehicleId);
+
+        public Task<bool> VehicleIsParked(int VehicleId);
+
         public Task<List<VehicleType>> GetTypes();
         public Task<VehicleType> GetVehicleTypeByType(string type);
         public Task<bool> AddVehicleType(VehicleType vehicleType);
         public Task<bool> AddVehicle(Vehicle vehicle);
+
+        public Task<bool> ParkVehicle(ParkVihecle parkVihecle);
 
         public Task<IEnumerable<Spot>> GetSpot();
 
@@ -38,8 +46,17 @@ namespace Garage3.Persistence.Services
 
         public Task<IEnumerable<Vehicle>> GetVehiclesByCustomerId(int id);
 
+        // Method to asynchronously create a customer, checking for duplicates based on first and last name.
         Task<bool> CreateCustomer(Customer customer);
 
         public IEnumerable<SelectListItem> GetGenres();
+
+        public Task<bool> VehicleExists(Vehicle vehicle);
+
+        public Task<bool> SpotFree(int SpotId);
+
+        public Task<bool> VehicleExists(int VehicleId);
+
+        public Task<List<Vehicle>> SearchMatchAsync(string searchInput, int id);
     }
 }

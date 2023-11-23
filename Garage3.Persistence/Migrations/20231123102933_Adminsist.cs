@@ -5,18 +5,17 @@
 namespace Garage3.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class Customer : Migration
+    public partial class Adminsist : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "ParkingId",
-                table: "Vehicle");
-
-            migrationBuilder.DropColumn(
-                name: "SpotId",
-                table: "Garage");
+            migrationBuilder.AddColumn<string>(
+                name: "RegistrationNumber",
+                table: "Vehicle",
+                type: "nvarchar(max)",
+                nullable: false,
+                defaultValue: "");
 
             migrationBuilder.AlterColumn<string>(
                 name: "LastName",
@@ -35,24 +34,25 @@ namespace Garage3.Persistence.Migrations
                 nullable: false,
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)");
+
+            migrationBuilder.AddColumn<string>(
+                name: "Name",
+                table: "Customer",
+                type: "nvarchar(max)",
+                nullable: false,
+                defaultValue: "");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<int>(
-                name: "ParkingId",
-                table: "Vehicle",
-                type: "int",
-                nullable: false,
-                defaultValue: 0);
+            migrationBuilder.DropColumn(
+                name: "RegistrationNumber",
+                table: "Vehicle");
 
-            migrationBuilder.AddColumn<int>(
-                name: "SpotId",
-                table: "Garage",
-                type: "int",
-                nullable: false,
-                defaultValue: 0);
+            migrationBuilder.DropColumn(
+                name: "Name",
+                table: "Customer");
 
             migrationBuilder.AlterColumn<string>(
                 name: "LastName",

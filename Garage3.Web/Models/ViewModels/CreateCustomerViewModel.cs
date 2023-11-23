@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Garage3.Web.Models.ViewModels
 {
+    // ViewModel for creating a new customer, used in the CreateCustomer action.
     public class CreateCustomerViewModel
     {
 

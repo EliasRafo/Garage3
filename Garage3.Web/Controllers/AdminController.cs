@@ -1,9 +1,15 @@
 ﻿using Garage3.Core.Entities;
 using Garage3.Core.Models;
+using Garage3.Web.Models.ViewModels;
 using Garage3.Persistence.Migrations;
 using Garage3.Persistence.Services;
-using Garage3.Web.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Query;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System.Collections;
@@ -18,6 +24,7 @@ namespace Garage3.Web.Controllers
         {
             _garageService = garageService;
         }
+
         public IActionResult Index()
         {
             return View();
@@ -44,6 +51,34 @@ namespace Garage3.Web.Controllers
             return View(vehicles);
         }
 
+        public async Task<IActionResult> Overview(int customerId)
+        {
+            var customer = await _garageService.GetCustomerByID(customerId);
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            var vehicles = await _garageService.GetVehiclesByCustomerId(customerId);
+            if (vehicles == null || !vehicles.Any())
+            {
+                return NotFound("No vehicles found for this customer.");
+            }
+
+            var vehicle = vehicles.FirstOrDefault();
+
+            var viewModel = new OverviewViewModel
+            {
+                Owner = customer.Name,
+                //MembershipType = customer.Membership.GetType,
+                VehicleType = vehicle.VehicleType.Name,
+                RegNum = vehicle.RegistrationNumber,
+                ParkDuration = TimeSpan.FromHours(1)
+            };
+
+            return View(viewModel);
+        }
+
         [HttpGet]
         public async Task<IActionResult> Index3()
         {
@@ -61,7 +96,7 @@ namespace Garage3.Web.Controllers
         public async Task<IActionResult> Filter3(IndexViewModel2 viewModel)
         {
             var customers = await _garageService.GetCustomers();
-            
+
             
             if (viewModel.FilterParams.Genre is null || viewModel.FilterParams.Title is null)
             {
@@ -157,4 +192,4 @@ namespace Garage3.Web.Controllers
 
 
     }
-}
+}         

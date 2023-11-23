@@ -1,11 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
+
 #nullable disable
 
 namespace Garage3.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class changeVehicle : Migration
+    public partial class Admin : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

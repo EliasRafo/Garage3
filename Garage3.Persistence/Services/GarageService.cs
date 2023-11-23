@@ -117,5 +117,15 @@ namespace Garage3.Persistence.Services
             return await _context.Vehicle.Where(v => v.CustomerId == id)
                 .Include(v => v.VehicleType).ToListAsync();
         }
+
+        public Task<IEnumerable<object>> AddVehicle()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<object>> GetVehiclesByCustomerId(object value)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

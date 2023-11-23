@@ -21,7 +21,7 @@ namespace Garage3.Web.Controllers
 
         public async Task<IActionResult> Back(int? id)
         {
-            Customer customer = await _service.GetCustomerByID((int)id);
+            Customer customer = await _service.GetCustomerByID(int)id);
             CustomerViewModel customerViewModel = await CreateCustomerViewModel(customer);
 
             return View(nameof(Index), customerViewModel);

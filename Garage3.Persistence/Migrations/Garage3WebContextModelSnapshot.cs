@@ -48,7 +48,7 @@ namespace Garage3.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customer");
+                    b.ToTable("Customer", (string)null);
                 });
 
             modelBuilder.Entity("Garage3.Core.Entities.Garage", b =>
@@ -68,7 +68,7 @@ namespace Garage3.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Garage");
+                    b.ToTable("Garage", (string)null);
                 });
 
             modelBuilder.Entity("Garage3.Core.Entities.Spot", b =>
@@ -103,7 +103,7 @@ namespace Garage3.Persistence.Migrations
 
                     b.HasIndex("VehicleId");
 
-                    b.ToTable("Spot");
+                    b.ToTable("Spot", (string)null);
                 });
 
             modelBuilder.Entity("Garage3.Core.Entities.Vehicle", b =>
@@ -153,7 +153,7 @@ namespace Garage3.Persistence.Migrations
 
                     b.HasIndex("VehicleTypeId");
 
-                    b.ToTable("Vehicle");
+                    b.ToTable("Vehicle", (string)null);
                 });
 
             modelBuilder.Entity("Garage3.Core.Entities.VehicleType", b =>
@@ -173,7 +173,7 @@ namespace Garage3.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("VehicleType");
+                    b.ToTable("VehicleType", (string)null);
                 });
 
             modelBuilder.Entity("Garage3.Core.Entities.Spot", b =>

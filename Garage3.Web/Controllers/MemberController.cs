@@ -274,8 +274,13 @@ namespace Garage3.Web.Controllers
 
                 if (await _service.ParkVehicle(parkVihecle))
                 {
+
                     //Feedback feedback = new Feedback() { status = "ok", message = $"Vihecle with registration number {vehicle.RegNum} is now parked at spot {id}." };
                     //TempData["AlertMessage"] = JsonConvert.SerializeObject(feedback);
+                    Customer customer = await _service.GetCustomerByID((int)customerId);
+                    customerViewModel = await CreateCustomerViewModel(customer);
+
+                    return View(nameof(Index), customerViewModel);
 
                 }
                 else
@@ -313,12 +318,38 @@ namespace Garage3.Web.Controllers
 
 
 
-            Customer customer = await _service.GetCustomerByID((int)customerId);
-            customerViewModel = await CreateCustomerViewModel(customer);
 
-            return View(nameof(Index), customerViewModel);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Search(string vehicleProp, int id)
+        {
+
+            if (vehicleProp == null)
+            {
+                vehicleProp = string.Empty;
+                //Feedback feedback = new Feedback() { status = "ok", message = $"No Match found for \"{vehicleProp}\"." };
+                //TempData["AlertMessage"] = JsonConvert.SerializeObject(feedback);
+                return View();
+            }
+            Search searchVehicle = new Search();
+            searchVehicle.Vehicles = await _service.SearchMatchAsync(vehicleProp, id);
+            searchVehicle.id = id;
+            if (searchVehicle.Vehicles.Count == 0)
+            {
+
+                //Feedback feedback = new Feedback() { status = "ok", message = $"No Match found for \"{vehicleProp}\"." };
+                //TempData["AlertMessage"] = JsonConvert.SerializeObject(feedback);
+                return View();
+            }
+
+            return View(searchVehicle);
         }
 
 
+       
+
     }
+
 }
+

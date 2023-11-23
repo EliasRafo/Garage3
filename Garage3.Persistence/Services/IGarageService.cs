@@ -44,5 +44,7 @@ namespace Garage3.Persistence.Services
         public Task<bool> SpotFree(int SpotId);
 
         public Task<bool> VehicleExists(int VehicleId);
+
+        public Task<List<Vehicle>> SearchMatchAsync(string searchInput, int id);
     }
 }

@@ -1,0 +1,86 @@
+﻿@model Garage3.Core.Models.Search
+
+@{
+    ViewData["Title"] = "Search your vehicles";
+}
+@* Unsafe Change id use *@
+<form asp-action="Search" asp-route-id="@Model.id" method="get">
+    <div class="form-group">
+        <P> Search </P>
+        <input type="text" name="vehicleProp" class="form-control" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Search" class="btn btn-primary" />
+    </div>
+</form>
+
+        |<a asp-action="Back" asp-route-id="@Model.id">Back to Overview</a> |
+
+<table class="table">
+    <thead>
+        <tr>
+           @*  <th>
+                @Html.DisplayNameFor(model => model.VehicleType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RegNum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Color)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Brand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WheelsNumber)
+            </th>
+@*             <th>
+                @Html.DisplayNameFor(model => model.CheckIn)
+            </th> 
+            <th></th> *@
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Vehicles) {
+        <tr>
+            <td>
+                @Html.DisplayNameFor(modelItem => item.VehicleType):
+                @Html.DisplayFor(modelItem => item.VehicleType.Type)
+            </td>
+            <td>
+                    @Html.DisplayNameFor(modelItem => item.RegNum):
+                @Html.DisplayFor(modelItem => item.RegNum)
+            </td>
+            <td>
+                    @Html.DisplayNameFor(modelItem => item.Color):
+                @Html.DisplayFor(modelItem => item.Color)
+            </td>
+            <td>
+                    @Html.DisplayNameFor(modelItem => item.Brand):
+                @Html.DisplayFor(modelItem => item.Brand)
+            </td>
+            <td>
+                    @Html.DisplayNameFor(modelItem => item.Model):
+                @Html.DisplayFor(modelItem => item.Model)
+            </td>
+            <td>
+                    @Html.DisplayNameFor(modelItem => item.WheelsNumber):
+                @Html.DisplayFor(modelItem => item.WheelsNumber)
+            </td>
+            <td>
+@*                 @Html.DisplayFor(modelItem => item.ParkingTime) *@
+            </td>
+            <td>
+
+                    
+         @*     <a asp-action="Details" asp-route-id="@item.VehicleId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.VehicleId">Delete</a> *@
+            </td>
+        </tr>
+}
+
+    </tbody>
+</table>

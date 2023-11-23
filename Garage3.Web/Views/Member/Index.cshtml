@@ -21,6 +21,16 @@
            
         </div>  INFO: for sending this data to park controller use of javascript is needed, (update if ther is time left). *@
 
+        <form asp-action="Search" asp-route-id="@Model.Customer.Id" method="get">
+            <div class="form-group">
+                <P> Search your vehicles </P>
+                <input type="text" name="vehicleProp" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Search" class="btn btn-primary" />
+            </div>
+        </form>
+
 
         <div class="container mt-5">
             <div class="row">

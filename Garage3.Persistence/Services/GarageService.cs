@@ -168,5 +168,27 @@ namespace Garage3.Persistence.Services
             return await _context.Spot.AnyAsync(e => e.VehicleId == VehicleId);
         }
 
+
+        public async Task<List<Vehicle>> SearchMatchAsync(string searchInput, int id)
+        {
+
+            ArgumentNullException.ThrowIfNull(searchInput, nameof(searchInput));
+
+
+            int.TryParse(searchInput, out int searchInt);
+
+
+            return await _context.Vehicle
+                   .Where(s => s.CustomerId== id &&
+                               s.Brand == searchInput ||
+                               s.Color == searchInput ||
+                               s.Model == searchInput ||
+                               s.RegNum == searchInput ||
+                               s.WheelsNumber == searchInt ||
+                               s.Id == searchInt ||
+                               //Fix//Translate to type.
+                               s.VehicleType.Type == searchInput).Include(s=>s.Customer).Include(s=>s.VehicleType).ToListAsync();
+        }
+
     }
 }

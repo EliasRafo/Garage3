@@ -1,11 +1,8 @@
 ﻿using Garage3.Core.Entities;
 using Garage3.Core.Models;
 using Garage3.Web.Models.ViewModels;
-using Garage3.Core.Entities;
-using Garage3.Core.Models;
 using Garage3.Persistence.Migrations;
 using Garage3.Persistence.Services;
-using Garage3.Web.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Query;
 using System;

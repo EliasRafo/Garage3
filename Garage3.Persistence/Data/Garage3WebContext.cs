@@ -29,6 +29,7 @@ namespace Garage3.Persistence.Data
         {
             
             base.OnModelCreating(modelBuilder);
-        }
+        
     }
+        }
 }

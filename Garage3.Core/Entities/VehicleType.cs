@@ -8,6 +8,8 @@ namespace Garage3.Core.Entities
 {
     public class VehicleType
     {
+        public string Name;
+
         public int Id { get; set; }
         public string Type { get; set; }
         public int Size { get; set; }

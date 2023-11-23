@@ -35,7 +35,7 @@
                 <div class="panel border border-info border-6 h-100">
                     <div class="panel-heading alert-info p-2 fw-bold">Capacity</div>
                     <div class="panel-body">
-                        <h4 class="m-5">@Model.Capacity</h4>
+                      @* <h4 class="m-5">@Model.Capacity</h4> *@
                     </div>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                 <div class="panel border border-success border-6 h-100">
                     <div class="panel-heading alert-success p-2 fw-bold">Customer</div>
                     <div class="panel-body">
-                        <h4 class="m-5">@Model.CustomerNumber</h4>
+                       @*  <h4 class="m-5">@Model.CustomerNumber</h4> *@
                     </div>
                 </div>
             </div>
@@ -51,7 +51,7 @@
                 <div class="panel border border-warning border-6 h-100">
                     <div class="panel-heading alert-warning p-2 fw-bold">Registered vehicles</div>
                     <div class="panel-body">
-                        <h4 class="m-5">@Model.VehiclesNumber</h4>
+                        @* <h4 class="m-5">@Model.VehiclesNumber</h4> *@
                     </div>
                 </div>
             </div>
@@ -59,7 +59,7 @@
                 <div class="panel border border-danger border-6 h-100">
                     <div class="panel-heading alert-danger p-2 fw-bold">Currently parked</div>
                     <div class="panel-body">
-                        <h4 class="m-5">@Model.CurrentlyParked</h4>
+                       @*  <h4 class="m-5">@Model.CurrentlyParked</h4> *@
                     </div>
                 </div>
             </div>
@@ -72,11 +72,11 @@
 
         <ul class="list-group">
 
-            @if (Model.VehiclesStatistic is not null)
+            @* @if (Model.VehiclesStatistic is not null) *@
             {
-                @foreach (var item in Model.VehiclesStatistic)
+               @*  @foreach (var item in Model.VehiclesStatistic) *@
                 {
-                    <li class="list-group-item d-flex justify-content-between align-items-center">@string.Format("Vehicle: {0}", @item.Name)<span class="badge bg-primary rounded-pill">@item.Total</span></li>
+                   @*  <li class="list-group-item d-flex justify-content-between align-items-center">@string.Format("Vehicle: {0}", @item.Name)<span class="badge bg-primary rounded-pill">@item.Total</span></li> *@
                 }
             }
             

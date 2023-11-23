@@ -9,6 +9,8 @@ namespace Garage3.Core.Entities
 {
     public class Vehicle
     {
+        public object Type;
+
         //[Key]
         public int Id { get; set; }
        //public int ParkingId { get; set; }
@@ -50,6 +52,7 @@ namespace Garage3.Core.Entities
 
         // Navigation property
         public ICollection<Spot> Spots { get; set; }
+        public string RegistrationNumber { get; set; }
     }
 
 }

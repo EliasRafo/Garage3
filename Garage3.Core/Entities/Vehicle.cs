@@ -54,7 +54,6 @@ namespace Garage3.Core.Entities
 
         // Navigation property
         public ICollection<Spot> Spots { get; set; }
-        public string RegistrationNumber { get; set; }
     }
 
 }

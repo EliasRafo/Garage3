@@ -69,10 +69,10 @@ namespace Garage3.Web.Controllers
 
             var viewModel = new OverviewViewModel
             {
-                Owner = customer.Name,
+                Owner = customer.FullName,
                 //MembershipType = customer.Membership.GetType,
-                VehicleType = vehicle.VehicleType.Name,
-                RegNum = vehicle.RegistrationNumber,
+                VehicleType = vehicle.VehicleType.Type,
+                RegNum = vehicle.RegNum,
                 ParkDuration = TimeSpan.FromHours(1)
             };
 

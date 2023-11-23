@@ -38,7 +38,5 @@ namespace Garage3.Core.Entities
 
         // Navigation property representing the collection of vehicles associated with the customer.
         public ICollection<Vehicle> Vehicles { get; set; }
-        public object Membership { get; set; }
-        public string Name { get; set; }
     }
 }

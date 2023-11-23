@@ -117,8 +117,8 @@ namespace Garage3.Persistence.Migrations
                             Id = 1,
                             Active = false,
                             Address = 1,
-                            CheckIn = new DateTime(2023, 11, 22, 16, 59, 43, 697, DateTimeKind.Local).AddTicks(9878),
-                            CheckOut = new DateTime(2023, 11, 22, 16, 59, 43, 697, DateTimeKind.Local).AddTicks(9955),
+                            CheckIn = new DateTime(2023, 11, 23, 16, 0, 49, 266, DateTimeKind.Local).AddTicks(8591),
+                            CheckOut = new DateTime(2023, 11, 23, 16, 0, 49, 266, DateTimeKind.Local).AddTicks(8639),
                             GarageId = 1
                         },
                         new
@@ -126,8 +126,8 @@ namespace Garage3.Persistence.Migrations
                             Id = 2,
                             Active = false,
                             Address = 2,
-                            CheckIn = new DateTime(2023, 11, 22, 16, 59, 43, 697, DateTimeKind.Local).AddTicks(9960),
-                            CheckOut = new DateTime(2023, 11, 22, 16, 59, 43, 697, DateTimeKind.Local).AddTicks(9961),
+                            CheckIn = new DateTime(2023, 11, 23, 16, 0, 49, 266, DateTimeKind.Local).AddTicks(8645),
+                            CheckOut = new DateTime(2023, 11, 23, 16, 0, 49, 266, DateTimeKind.Local).AddTicks(8647),
                             GarageId = 1
                         },
                         new
@@ -135,8 +135,8 @@ namespace Garage3.Persistence.Migrations
                             Id = 3,
                             Active = false,
                             Address = 3,
-                            CheckIn = new DateTime(2023, 11, 22, 16, 59, 43, 697, DateTimeKind.Local).AddTicks(9963),
-                            CheckOut = new DateTime(2023, 11, 22, 16, 59, 43, 697, DateTimeKind.Local).AddTicks(9964),
+                            CheckIn = new DateTime(2023, 11, 23, 16, 0, 49, 266, DateTimeKind.Local).AddTicks(8649),
+                            CheckOut = new DateTime(2023, 11, 23, 16, 0, 49, 266, DateTimeKind.Local).AddTicks(8650),
                             GarageId = 1
                         },
                         new
@@ -144,8 +144,8 @@ namespace Garage3.Persistence.Migrations
                             Id = 4,
                             Active = false,
                             Address = 4,
-                            CheckIn = new DateTime(2023, 11, 22, 16, 59, 43, 697, DateTimeKind.Local).AddTicks(9965),
-                            CheckOut = new DateTime(2023, 11, 22, 16, 59, 43, 697, DateTimeKind.Local).AddTicks(9966),
+                            CheckIn = new DateTime(2023, 11, 23, 16, 0, 49, 266, DateTimeKind.Local).AddTicks(8652),
+                            CheckOut = new DateTime(2023, 11, 23, 16, 0, 49, 266, DateTimeKind.Local).AddTicks(8653),
                             GarageId = 1
                         },
                         new
@@ -153,8 +153,8 @@ namespace Garage3.Persistence.Migrations
                             Id = 5,
                             Active = false,
                             Address = 5,
-                            CheckIn = new DateTime(2023, 11, 22, 16, 59, 43, 697, DateTimeKind.Local).AddTicks(9967),
-                            CheckOut = new DateTime(2023, 11, 22, 16, 59, 43, 697, DateTimeKind.Local).AddTicks(9968),
+                            CheckIn = new DateTime(2023, 11, 23, 16, 0, 49, 266, DateTimeKind.Local).AddTicks(8655),
+                            CheckOut = new DateTime(2023, 11, 23, 16, 0, 49, 266, DateTimeKind.Local).AddTicks(8657),
                             GarageId = 1
                         },
                         new
@@ -162,8 +162,8 @@ namespace Garage3.Persistence.Migrations
                             Id = 6,
                             Active = false,
                             Address = 6,
-                            CheckIn = new DateTime(2023, 11, 22, 16, 59, 43, 697, DateTimeKind.Local).AddTicks(9971),
-                            CheckOut = new DateTime(2023, 11, 22, 16, 59, 43, 697, DateTimeKind.Local).AddTicks(9972),
+                            CheckIn = new DateTime(2023, 11, 23, 16, 0, 49, 266, DateTimeKind.Local).AddTicks(8661),
+                            CheckOut = new DateTime(2023, 11, 23, 16, 0, 49, 266, DateTimeKind.Local).AddTicks(8662),
                             GarageId = 1
                         },
                         new
@@ -171,8 +171,8 @@ namespace Garage3.Persistence.Migrations
                             Id = 7,
                             Active = false,
                             Address = 7,
-                            CheckIn = new DateTime(2023, 11, 22, 16, 59, 43, 697, DateTimeKind.Local).AddTicks(9973),
-                            CheckOut = new DateTime(2023, 11, 22, 16, 59, 43, 697, DateTimeKind.Local).AddTicks(9974),
+                            CheckIn = new DateTime(2023, 11, 23, 16, 0, 49, 266, DateTimeKind.Local).AddTicks(8664),
+                            CheckOut = new DateTime(2023, 11, 23, 16, 0, 49, 266, DateTimeKind.Local).AddTicks(8665),
                             GarageId = 1
                         },
                         new
@@ -180,8 +180,8 @@ namespace Garage3.Persistence.Migrations
                             Id = 8,
                             Active = false,
                             Address = 8,
-                            CheckIn = new DateTime(2023, 11, 22, 16, 59, 43, 697, DateTimeKind.Local).AddTicks(9976),
-                            CheckOut = new DateTime(2023, 11, 22, 16, 59, 43, 697, DateTimeKind.Local).AddTicks(9977),
+                            CheckIn = new DateTime(2023, 11, 23, 16, 0, 49, 266, DateTimeKind.Local).AddTicks(8667),
+                            CheckOut = new DateTime(2023, 11, 23, 16, 0, 49, 266, DateTimeKind.Local).AddTicks(8668),
                             GarageId = 1
                         },
                         new
@@ -189,8 +189,8 @@ namespace Garage3.Persistence.Migrations
                             Id = 9,
                             Active = false,
                             Address = 9,
-                            CheckIn = new DateTime(2023, 11, 22, 16, 59, 43, 697, DateTimeKind.Local).AddTicks(9978),
-                            CheckOut = new DateTime(2023, 11, 22, 16, 59, 43, 697, DateTimeKind.Local).AddTicks(9979),
+                            CheckIn = new DateTime(2023, 11, 23, 16, 0, 49, 266, DateTimeKind.Local).AddTicks(8670),
+                            CheckOut = new DateTime(2023, 11, 23, 16, 0, 49, 266, DateTimeKind.Local).AddTicks(8672),
                             GarageId = 1
                         },
                         new
@@ -198,8 +198,8 @@ namespace Garage3.Persistence.Migrations
                             Id = 10,
                             Active = false,
                             Address = 10,
-                            CheckIn = new DateTime(2023, 11, 22, 16, 59, 43, 697, DateTimeKind.Local).AddTicks(9981),
-                            CheckOut = new DateTime(2023, 11, 22, 16, 59, 43, 697, DateTimeKind.Local).AddTicks(9982),
+                            CheckIn = new DateTime(2023, 11, 23, 16, 0, 49, 266, DateTimeKind.Local).AddTicks(8674),
+                            CheckOut = new DateTime(2023, 11, 23, 16, 0, 49, 266, DateTimeKind.Local).AddTicks(8676),
                             GarageId = 1
                         },
                         new
@@ -207,8 +207,8 @@ namespace Garage3.Persistence.Migrations
                             Id = 11,
                             Active = false,
                             Address = 11,
-                            CheckIn = new DateTime(2023, 11, 22, 16, 59, 43, 697, DateTimeKind.Local).AddTicks(9983),
-                            CheckOut = new DateTime(2023, 11, 22, 16, 59, 43, 697, DateTimeKind.Local).AddTicks(9984),
+                            CheckIn = new DateTime(2023, 11, 23, 16, 0, 49, 266, DateTimeKind.Local).AddTicks(8677),
+                            CheckOut = new DateTime(2023, 11, 23, 16, 0, 49, 266, DateTimeKind.Local).AddTicks(8679),
                             GarageId = 1
                         },
                         new
@@ -216,8 +216,8 @@ namespace Garage3.Persistence.Migrations
                             Id = 12,
                             Active = false,
                             Address = 12,
-                            CheckIn = new DateTime(2023, 11, 22, 16, 59, 43, 697, DateTimeKind.Local).AddTicks(9986),
-                            CheckOut = new DateTime(2023, 11, 22, 16, 59, 43, 697, DateTimeKind.Local).AddTicks(9987),
+                            CheckIn = new DateTime(2023, 11, 23, 16, 0, 49, 266, DateTimeKind.Local).AddTicks(8681),
+                            CheckOut = new DateTime(2023, 11, 23, 16, 0, 49, 266, DateTimeKind.Local).AddTicks(8682),
                             GarageId = 1
                         },
                         new
@@ -225,8 +225,8 @@ namespace Garage3.Persistence.Migrations
                             Id = 13,
                             Active = false,
                             Address = 13,
-                            CheckIn = new DateTime(2023, 11, 22, 16, 59, 43, 697, DateTimeKind.Local).AddTicks(9988),
-                            CheckOut = new DateTime(2023, 11, 22, 16, 59, 43, 697, DateTimeKind.Local).AddTicks(9989),
+                            CheckIn = new DateTime(2023, 11, 23, 16, 0, 49, 266, DateTimeKind.Local).AddTicks(8684),
+                            CheckOut = new DateTime(2023, 11, 23, 16, 0, 49, 266, DateTimeKind.Local).AddTicks(8685),
                             GarageId = 1
                         },
                         new
@@ -234,8 +234,8 @@ namespace Garage3.Persistence.Migrations
                             Id = 14,
                             Active = false,
                             Address = 14,
-                            CheckIn = new DateTime(2023, 11, 22, 16, 59, 43, 697, DateTimeKind.Local).AddTicks(9990),
-                            CheckOut = new DateTime(2023, 11, 22, 16, 59, 43, 697, DateTimeKind.Local).AddTicks(9991),
+                            CheckIn = new DateTime(2023, 11, 23, 16, 0, 49, 266, DateTimeKind.Local).AddTicks(8687),
+                            CheckOut = new DateTime(2023, 11, 23, 16, 0, 49, 266, DateTimeKind.Local).AddTicks(8688),
                             GarageId = 1
                         },
                         new
@@ -243,8 +243,8 @@ namespace Garage3.Persistence.Migrations
                             Id = 15,
                             Active = false,
                             Address = 15,
-                            CheckIn = new DateTime(2023, 11, 22, 16, 59, 43, 697, DateTimeKind.Local).AddTicks(9992),
-                            CheckOut = new DateTime(2023, 11, 22, 16, 59, 43, 697, DateTimeKind.Local).AddTicks(9993),
+                            CheckIn = new DateTime(2023, 11, 23, 16, 0, 49, 266, DateTimeKind.Local).AddTicks(8690),
+                            CheckOut = new DateTime(2023, 11, 23, 16, 0, 49, 266, DateTimeKind.Local).AddTicks(8691),
                             GarageId = 1
                         },
                         new
@@ -252,8 +252,8 @@ namespace Garage3.Persistence.Migrations
                             Id = 16,
                             Active = false,
                             Address = 16,
-                            CheckIn = new DateTime(2023, 11, 22, 16, 59, 43, 697, DateTimeKind.Local).AddTicks(9994),
-                            CheckOut = new DateTime(2023, 11, 22, 16, 59, 43, 697, DateTimeKind.Local).AddTicks(9995),
+                            CheckIn = new DateTime(2023, 11, 23, 16, 0, 49, 266, DateTimeKind.Local).AddTicks(8693),
+                            CheckOut = new DateTime(2023, 11, 23, 16, 0, 49, 266, DateTimeKind.Local).AddTicks(8694),
                             GarageId = 1
                         },
                         new
@@ -261,8 +261,8 @@ namespace Garage3.Persistence.Migrations
                             Id = 17,
                             Active = false,
                             Address = 17,
-                            CheckIn = new DateTime(2023, 11, 22, 16, 59, 43, 697, DateTimeKind.Local).AddTicks(9996),
-                            CheckOut = new DateTime(2023, 11, 22, 16, 59, 43, 697, DateTimeKind.Local).AddTicks(9997),
+                            CheckIn = new DateTime(2023, 11, 23, 16, 0, 49, 266, DateTimeKind.Local).AddTicks(8696),
+                            CheckOut = new DateTime(2023, 11, 23, 16, 0, 49, 266, DateTimeKind.Local).AddTicks(8697),
                             GarageId = 1
                         },
                         new
@@ -270,8 +270,8 @@ namespace Garage3.Persistence.Migrations
                             Id = 18,
                             Active = false,
                             Address = 18,
-                            CheckIn = new DateTime(2023, 11, 22, 16, 59, 43, 697, DateTimeKind.Local).AddTicks(9999),
-                            CheckOut = new DateTime(2023, 11, 22, 16, 59, 43, 698, DateTimeKind.Local),
+                            CheckIn = new DateTime(2023, 11, 23, 16, 0, 49, 266, DateTimeKind.Local).AddTicks(8700),
+                            CheckOut = new DateTime(2023, 11, 23, 16, 0, 49, 266, DateTimeKind.Local).AddTicks(8702),
                             GarageId = 1
                         },
                         new
@@ -279,8 +279,8 @@ namespace Garage3.Persistence.Migrations
                             Id = 19,
                             Active = false,
                             Address = 19,
-                            CheckIn = new DateTime(2023, 11, 22, 16, 59, 43, 698, DateTimeKind.Local).AddTicks(1),
-                            CheckOut = new DateTime(2023, 11, 22, 16, 59, 43, 698, DateTimeKind.Local).AddTicks(3),
+                            CheckIn = new DateTime(2023, 11, 23, 16, 0, 49, 266, DateTimeKind.Local).AddTicks(8704),
+                            CheckOut = new DateTime(2023, 11, 23, 16, 0, 49, 266, DateTimeKind.Local).AddTicks(8705),
                             GarageId = 1
                         },
                         new
@@ -288,8 +288,8 @@ namespace Garage3.Persistence.Migrations
                             Id = 20,
                             Active = false,
                             Address = 20,
-                            CheckIn = new DateTime(2023, 11, 22, 16, 59, 43, 698, DateTimeKind.Local).AddTicks(4),
-                            CheckOut = new DateTime(2023, 11, 22, 16, 59, 43, 698, DateTimeKind.Local).AddTicks(5),
+                            CheckIn = new DateTime(2023, 11, 23, 16, 0, 49, 266, DateTimeKind.Local).AddTicks(8707),
+                            CheckOut = new DateTime(2023, 11, 23, 16, 0, 49, 266, DateTimeKind.Local).AddTicks(8708),
                             GarageId = 1
                         });
                 });

@@ -25,9 +25,9 @@ namespace Garage3.Core.Entities
         public string FullName => $"{FirstName} {LastName}";
 
         [Required]
-        [RegularExpression(@"^(19|20)\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])[-]\d{4}$", 
-            ErrorMessage="Social Security Number must be in this format YYYYMMDD-NNNN")]
-		public string SocialNum { get; set; }
+        [RegularExpression(@"^(19|20)\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])[-]\d{4}$",
+            ErrorMessage = "Social Security Number must be in this format YYYYMMDD-NNNN")]
+        public string SocialNum { get; set; }
 
         //Navigation property
         public ICollection<Vehicle> Vehicles { get; set; }

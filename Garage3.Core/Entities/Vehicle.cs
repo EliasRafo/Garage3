@@ -11,9 +11,9 @@ namespace Garage3.Core.Entities
     {
         //[Key]
         public int Id { get; set; }
-       //public int ParkingId { get; set; }
-       //FK
-       public int VehicleTypeId { get; set; }
+        //public int ParkingId { get; set; }
+        //FK
+        public int VehicleTypeId { get; set; }
         public VehicleType VehicleType { get; set; }
 
         [Display(Name = "Registration number")]
@@ -40,7 +40,7 @@ namespace Garage3.Core.Entities
         [Display(Name = "Wheels Number")]
         [Required(ErrorMessage = "Wheels Number is required")]
         [Range(0, 12)]
-        public int  WheelsNumber { get; set; }
+        public int WheelsNumber { get; set; }
 
         // Foreign Key
         public int CustomerId { get; set; }
